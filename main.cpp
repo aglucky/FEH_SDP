@@ -10,7 +10,8 @@ private:
     // Player stats and state variables
     int playerScore;
     int playerLives;
-    double maxSpeed = .5;
+    double normalHeight = 200;
+    double maxSpeed = 5.5;
     double speed;
     double acceleration = 5.2;
     double x, y;
@@ -27,6 +28,7 @@ public:
     void loseLife();
     void isDead();
     void startTimer();
+    void update();
     void draw();
 };
 
@@ -36,7 +38,7 @@ Player::Player()
     playerScore = 0;
     playerLives = 3;
     x = 10;
-    y = 10;
+    y = normalHeight;
     time = 0;
 }
 
@@ -73,18 +75,47 @@ void Player::moveBackward()
     x += speed;
 }
 
+//Makes the player jump like mario
+void Player::jump()
+{
+    if (y == normalHeight)
+    {
+        y -= 10;
+    }
+}
+
+//Makes the player deccelerate and fall like mario
+void Player::update()
+{
+    if (speed > 0)
+    {
+        speed -= acceleration;
+    }
+    else if (speed < 0)
+    {
+        speed += acceleration;
+    }
+    if(y < normalHeight)
+    {
+        y += 4;
+    }
+}
+
+
 
 int main()
 {
 
     // Create Main Menu
     MainMenu start = MainMenu();
+
     Player test = Player();
     test.draw();
     Sleep(1.5);
-    test.moveForward();
+    test.jump();
     LCD.Clear(BLACK);
     test.draw();
+
     while (true)
     {
         //start.menu();

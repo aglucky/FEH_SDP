@@ -8,7 +8,7 @@ void MainMenu::drawMain()
 {
     LCD.SetBackgroundColor(RED);
     LCD.Clear();
-    LCD.WriteAt("Welcome to FEH Adventure",0,0);
+    LCD.WriteAt("Welcome to FEH Adventure",12,8);
 
     playButton.draw();
     statButton.draw();
