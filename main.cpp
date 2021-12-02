@@ -1,13 +1,20 @@
 #include "FEHLCD.h"
 #include "FEhUtility.h"
-#include "mainmenu.h"
-
+#include <mainmenu.h>
 
 using namespace std;
 
-/*
- * Entry point to the application
- */
+class Player
+{
+    private:
+        int playerScore;
+        int playerLives;
+        double x, y;
+        double time;
+        
+    public:
+        Player();
+};
 
 
 

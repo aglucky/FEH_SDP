@@ -1,5 +1,6 @@
 #include "usertools.h"
 
+//Creates a button with a set position and size
 Button::Button(float xNew, float yNew, float widthNew, float heightNew, string nm)
 {
     x = xNew;
@@ -9,7 +10,7 @@ Button::Button(float xNew, float yNew, float widthNew, float heightNew, string n
     name = nm;
 }
 
-//Button constuctor that puts button in corner using lenght on name as width
+//Creates a button with pre-set position and size based on name
 Button::Button(string nm)
 {
     name = nm;
@@ -19,7 +20,7 @@ Button::Button(string nm)
     y = (240 - height);
 }
  
-
+//Shows the button on LCD
 void Button::draw()
 {
     LCD.DrawRectangle(x, y, width, height);
@@ -31,9 +32,10 @@ void Button::draw()
     
 }
 
+//
 bool Button::isPressed(float xTouch, float yTouch)
 {
-    if(xTouch > x && xTouch < x+width && yTouch > y && yTouch < y+height)
+    if(xTouch >= x && xTouch <= x+width && yTouch >= y && yTouch <= y+height)
     {
         return true;
     }
