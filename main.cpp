@@ -2,95 +2,84 @@
 #include "FEhUtility.h"
 #include <string>
 
+
+using namespace std;
+
 /*
  * Entry point to the application
  */
-
 
 
 class Button
 {
     private:
         float x, y, width, height;
-        std::string name;
+        string name;
     public:
-        Button(float x, float y, float width, float height, std::string name);
+        Button(float x, float y, float width, float height, string name);
         bool isPressed(float, float);
         void draw();
 };
 
-
-class Screen
+class MainMenu
 {
     public:
-        Screen(Button prevButton);
-        Button prevButton;
-        Button backButton= Button(0,0,100,20,"Back");
-        void draw();
-};
+        Button playButton = Button(0,100,100,20,"Play");
+        Button statButton = Button(0,200,100,20,"Stats");
+        Button ruleButton = Button(200,100,100,20,"Rules");
+        Button creditButton =Button(200,200,100,20,"Credits");
 
-class StartScreen: public Screen
-{
-    public:
-        StartScreen();
-        Screen play;
-        Screen stat;
-        Screen rule;
-        Screen credit;
-        void draw();
+        MainMenu();
+        void drawMain();
+        void drawStats();
+        void drawRules();
+        void drawCredits();
+        void drawPlay();
 };
 
 
-        
 
 
 int main() {
-
-    StartScreen start = StartScreen();
    
-
-
-    start.draw();
-    float x,y;
+    //Create Main Menu
+    MainMenu start = MainMenu();
+    start.drawMain();
+   
+    //Game Loop
+    float x,y;    
     while(true)
     {
-        while(!LCD.Touch(&x, &y)){}
-        if(start.play.prevButton.isPressed(x,y))
+        while(!LCD.Touch(&x,&y)){}
+        //Check for button press
+        if(start.playButton.isPressed(x,y))
         {
-            start.play.draw();
+            start.drawPlay();
         }
-        else if(start.stat.prevButton.isPressed(x,y))
+        if(start.statButton.isPressed(x,y))
         {
-            start.stat.draw();
+            start.drawStats();
         }
-        else if(start.rule.prevButton.isPressed(x,y))
+        if(start.ruleButton.isPressed(x,y))
         {
-            start.rule.draw();
+            start.drawRules();
         }
-        else if(start.credit.prevButton.isPressed(x,y))
+        if(start.creditButton.isPressed(x,y))
         {
-            start.credit.draw();
+            start.drawCredits();
         }
-       
-        
-
-    }
-    //Never Closes
-    while(true)
-    {
-        LCD.Update();
     }
  
     return 0;
 }
 
-Button::Button(float x, float y, float width, float height, std::string name)
+Button::Button(float xNew, float yNew, float widthNew, float heightNew, string nm)
 {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
-    this->name = name;
+    x = xNew;
+    y = yNew;
+    width = 5+nm.length()*20;
+    height = heightNew;
+    name = nm;
 }
 
 void Button::draw()
@@ -99,12 +88,14 @@ void Button::draw()
     LCD.SetFontColor(BLUE);
     LCD.FillRectangle(x, y, width, height);
     LCD.SetFontColor(WHITE);
-    LCD.WriteAt(name.c_str(), x+1, y+2);
+    LCD.WriteAt(name.c_str(), x+5, y+2);
+    LCD.SetFontColor(BLUE);
+    
 }
 
-bool Button::isPressed(float x, float y)
+bool Button::isPressed(float xTouch, float yTouch)
 {
-    if(x > this->x && x < this->x + this->width && y > this->y && y < this->y + this->height)
+    if(xTouch > x && xTouch < x+width && yTouch > y && yTouch < y+height)
     {
         return true;
     }
@@ -112,47 +103,50 @@ bool Button::isPressed(float x, float y)
     {
         return false;
     }
-}
 
-Screen::Screen(Button prevButton)
-{
-    this->prevButton = prevButton;
-}
-
-StartScreen::StartScreen()
-{
-    Button playButton = Button(0,100,100,20,"Play");
-    this->play = Screen(playButton);
-
-    Button statButton = Button(0,200,100,20,"Stats");
-    this->stat = Screen(statButton);
-
-    Button ruleButton = Button(200,100,100,20,"Rules");
-    this->rule = Screen(ruleButton);
-
-    Button creditButton = Button(200,200,100,20,"Credits");
-    this->credit = Screen(creditButton);
-    
 }
 
 
-void StartScreen::draw()
+MainMenu::MainMenu(){}
+
+void MainMenu::drawMain()
 {
     LCD.SetBackgroundColor(RED);
     LCD.Clear();
     LCD.WriteAt("Welcome to FEH Adventure",0,0);
 
-    play.draw();
-    stat.draw();
-    rule.draw();
-    credit.draw();
-
+    playButton.draw();
+    statButton.draw();
+    ruleButton.draw();
+    creditButton.draw();    
 }
 
-void Screen::draw()
+void MainMenu::drawStats()
 {
     LCD.SetBackgroundColor(BLUE);
     LCD.Clear();
-
-    backButton.draw();
+    LCD.WriteAt("Stats",0,0);
 }
+
+void MainMenu::drawRules()
+{
+    LCD.SetBackgroundColor(GREEN);
+    LCD.Clear();
+    LCD.WriteAt("Rules",0,0);
+}
+
+void MainMenu::drawCredits()
+{
+    LCD.SetBackgroundColor(YELLOW);
+    LCD.Clear();
+    LCD.WriteAt("Credits",0,0);
+}
+
+void MainMenu::drawPlay()
+{
+    LCD.SetBackgroundColor(BLACK);
+    LCD.Clear();
+    LCD.WriteAt("Play",0,0);
+}
+
+
