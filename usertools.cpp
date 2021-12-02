@@ -32,7 +32,7 @@ void Button::draw()
     
 }
 
-//
+//Returns whether a button has been pressed
 bool Button::isPressed(float xTouch, float yTouch)
 {
     if(xTouch >= x && xTouch <= x+width && yTouch >= y && yTouch <= y+height)

@@ -1,7 +1,9 @@
 #include "mainmenu.h"
 
+//Initialize the main menu
 MainMenu::MainMenu(){}
 
+//Displays the main menu on the LCD
 void MainMenu::drawMain()
 {
     LCD.SetBackgroundColor(RED);
@@ -14,6 +16,7 @@ void MainMenu::drawMain()
     creditButton.draw();    
 }
 
+//Draws the stat subpage
 void MainMenu::drawStats()
 {
     LCD.SetBackgroundColor(ORANGE);
@@ -21,6 +24,7 @@ void MainMenu::drawStats()
     backButton.draw();
 }
 
+//Draws the rules subpage
 void MainMenu::drawRules()
 {
     LCD.SetBackgroundColor(GREEN);
@@ -28,6 +32,7 @@ void MainMenu::drawRules()
     backButton.draw();
 }
 
+//Draws the credits subpage
 void MainMenu::drawCredits()
 {
     LCD.SetBackgroundColor(YELLOW);
@@ -35,6 +40,7 @@ void MainMenu::drawCredits()
     backButton.draw();
 }
 
+//Draws the play subpage
 void MainMenu::drawPlay()
 {
     LCD.SetBackgroundColor(INDIGO);
@@ -42,6 +48,8 @@ void MainMenu::drawPlay()
     backButton.draw();
 }
 
+
+//Allows main menu to be used by player
 void MainMenu::menu()
 {
     drawMain();
@@ -51,7 +59,8 @@ void MainMenu::menu()
     while(true)
     {
         while(!LCD.Touch(&x,&y)){}
-        //Check for button press
+
+        //Check for button presses and handles changes
         if(playButton.isPressed(x,y))
         {
             drawPlay();
