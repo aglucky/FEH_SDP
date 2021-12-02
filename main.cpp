@@ -6,64 +6,89 @@ using namespace std;
 
 class Player
 {
-    private:
-        //Player stats and state variables
-        int playerScore;
-        int playerLives;
-        double maxSpeed = .5;
-        double x, y;
-        double time;
-        
-    public:
-        //Constructor and instance methods
-        Player();
-        //Destructor
-        ~Player();
-        void moveForward();
-        void moveBackward();
-        void jump();
-        void loseLife();
-        void isDead();
-        void startTimer();
-        void draw();
+private:
+    // Player stats and state variables
+    int playerScore;
+    int playerLives;
+    double maxSpeed = .5;
+    double speed;
+    double acceleration = 5.2;
+    double x, y;
+    double time;
+
+public:
+    // Constructor and instance methods
+    Player();
+    // Destructor
+    ~Player();
+    void moveForward();
+    void moveBackward();
+    void jump();
+    void loseLife();
+    void isDead();
+    void startTimer();
+    void draw();
 };
 
-//Create a new player
+// Create a new player
 Player::Player()
 {
     playerScore = 0;
     playerLives = 3;
-    x = 0;
-    y = 0;
+    x = 10;
+    y = 10;
     time = 0;
 }
 
-//Destructor
+// Destructor
 Player::~Player()
 {
-    //Nothing to do here
+    // Nothing to do here
 }
 
-//Move the player forward
+//Draw the player as a rectangle
+void Player::draw()
+{
+    LCD.SetFontColor(BLUE);
+    LCD.FillRectangle(x, y, x + 20, y + 20);
+}
 
-
-
-
-int main() {
-   
-    //Create Main Menu
-    MainMenu start = MainMenu();
-    while(true)
+//Moves the player forawrd like mario
+void Player::moveForward()
+{
+    if (speed < maxSpeed)
     {
-    start.menu();
+        speed += acceleration;
+    }
+    x += speed;
+}
+
+//Moves the player backward like mario
+void Player::moveBackward()
+{
+    if (speed > -maxSpeed)
+    {
+        speed -= acceleration;
+    }
+    x += speed;
+}
+
+
+int main()
+{
+
+    // Create Main Menu
+    MainMenu start = MainMenu();
+    Player test = Player();
+    test.draw();
+    Sleep(1.5);
+    test.moveForward();
+    LCD.Clear(BLACK);
+    test.draw();
+    while (true)
+    {
+        //start.menu();
+        LCD.Update();
     }
     return 0;
 }
-
-
-
-
-
-
-
-
