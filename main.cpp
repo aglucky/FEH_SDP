@@ -17,6 +17,7 @@ class Button
         string name;
     public:
         Button(float x, float y, float width, float height, string name);
+        Button(string name);
         bool isPressed(float, float);
         void draw();
 };
@@ -24,10 +25,12 @@ class Button
 class MainMenu
 {
     public:
-        Button playButton = Button(0,100,100,20,"Play");
-        Button statButton = Button(0,200,100,20,"Stats");
-        Button ruleButton = Button(200,100,100,20,"Rules");
-        Button creditButton =Button(200,200,100,20,"Credits");
+        Button playButton = Button(10,100,100,20,"Play");
+        Button statButton = Button(10,200,100,20,"Stats");
+        Button ruleButton = Button(210,100,100,20,"Rules");
+        Button creditButton = Button(210,200,100,20,"Credits");
+        // Button backButton = Button(200,200,100,20,"Back");
+        Button backButton = Button("Back");
 
         MainMenu();
         void drawMain();
@@ -55,32 +58,88 @@ int main() {
         if(start.playButton.isPressed(x,y))
         {
             start.drawPlay();
+            while(1){
+                Sleep(200);
+                while(!LCD.Touch(&x,&y)){}
+                if(start.backButton.isPressed(x,y))
+                {
+                    start.drawMain();
+                    Sleep(200);
+                    break;
+                }
+            }
         }
-        if(start.statButton.isPressed(x,y))
+        else if(start.statButton.isPressed(x,y))
         {
             start.drawStats();
+            while(1){
+                Sleep(200);
+                while(!LCD.Touch(&x,&y)){}
+                if(start.backButton.isPressed(x,y))
+                {
+                    start.drawMain();
+                    Sleep(200);
+                    break;
+                }
+            }
+        
         }
-        if(start.ruleButton.isPressed(x,y))
+        else if(start.ruleButton.isPressed(x,y))
         {
             start.drawRules();
+            while(1){
+                Sleep(200);
+                while(!LCD.Touch(&x,&y)){}
+                if(start.backButton.isPressed(x,y))
+                {
+                    start.drawMain();
+                    Sleep(200);
+                    break;
+                }
+            }
+        
         }
-        if(start.creditButton.isPressed(x,y))
+        else if(start.creditButton.isPressed(x,y))
         {
             start.drawCredits();
+            while(1){
+                Sleep(200);
+                while(!LCD.Touch(&x,&y)){}
+                if(start.backButton.isPressed(x,y))
+                {
+                    start.drawMain();
+                    Sleep(200);
+                    break;
+                }
+            }
         }
+        //x = 0, y = 0;
+        
     }
  
     return 0;
 }
 
+//Classio
 Button::Button(float xNew, float yNew, float widthNew, float heightNew, string nm)
 {
     x = xNew;
     y = yNew;
-    width = 5+nm.length()*20;
+    width = widthNew;
     height = heightNew;
     name = nm;
 }
+
+//Button constuctor that puts button in corner using lenght on name as width
+Button::Button(string nm)
+{
+    name = nm;
+    width = name.length()*15;
+    height = 20.0;
+    x = (320 - width);
+    y = (240 - height);
+}
+ 
 
 void Button::draw()
 {
@@ -123,30 +182,30 @@ void MainMenu::drawMain()
 
 void MainMenu::drawStats()
 {
-    LCD.SetBackgroundColor(BLUE);
+    LCD.SetBackgroundColor(ORANGE);
     LCD.Clear();
-    LCD.WriteAt("Stats",0,0);
+    backButton.draw();
 }
 
 void MainMenu::drawRules()
 {
     LCD.SetBackgroundColor(GREEN);
     LCD.Clear();
-    LCD.WriteAt("Rules",0,0);
+    backButton.draw();
 }
 
 void MainMenu::drawCredits()
 {
     LCD.SetBackgroundColor(YELLOW);
     LCD.Clear();
-    LCD.WriteAt("Credits",0,0);
+    backButton.draw();
 }
 
 void MainMenu::drawPlay()
 {
-    LCD.SetBackgroundColor(BLACK);
+    LCD.SetBackgroundColor(INDIGO);
     LCD.Clear();
-    LCD.WriteAt("Play",0,0);
+    backButton.draw();
 }
 
 
