@@ -118,7 +118,7 @@ int main()
 
     while (true)
     {
-        //start.menu();
+        start.menu();
         LCD.Update();
     }
     return 0;
