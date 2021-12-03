@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+/* Author: William Comer */
+
 class Platform : public GameObject{
     public:
        Platform();
