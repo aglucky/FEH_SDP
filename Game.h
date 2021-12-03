@@ -1,4 +1,4 @@
-
+/* Author: William Comer */
 class Game{
     public:
         Game();
