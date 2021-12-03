@@ -11,9 +11,9 @@ private:
     int playerScore;
     int playerLives;
     double normalHeight = 200;
-    double maxSpeed = 5.5;
-    double speed;
-    double acceleration = 5.2;
+    double maxSpeed = 5.5, maxJumpSpeed = -5.0;
+    double xSpeed, ySpeed;
+    double xAcceleration = 5.2, yAcceleration = 10.2;
     double x, y;
     double time;
 
@@ -52,27 +52,30 @@ Player::~Player()
 void Player::draw()
 {
     LCD.SetFontColor(BLUE);
-    LCD.FillRectangle(x, y, x + 20, y + 20);
+    LCD.FillRectangle(x, y, 20, 20);
 }
 
 //Moves the player forawrd like mario
 void Player::moveForward()
 {
-    if (speed < maxSpeed)
+    xSpeed += xAcceleration;
+    if (xSpeed > maxSpeed)
     {
-        speed += acceleration;
+        xSpeed = maxSpeed;
     }
-    x += speed;
+    x += xSpeed;
 }
 
 //Moves the player backward like mario
 void Player::moveBackward()
 {
-    if (speed > -maxSpeed)
+    xSpeed -= xAcceleration;
+    if (xSpeed < -maxSpeed)
     {
-        speed -= acceleration;
+        xSpeed = -maxSpeed;
     }
-    x += speed;
+    x += xSpeed;
+    
 }
 
 //Makes the player jump like mario
@@ -80,25 +83,39 @@ void Player::jump()
 {
     if (y == normalHeight)
     {
-        y -= 10;
+        ySpeed -= yAcceleration;
+        if(ySpeed < maxJumpSpeed)
+        {
+            ySpeed = maxJumpSpeed;
+        }
     }
+    y+=ySpeed;
 }
 
 //Makes the player deccelerate and fall like mario
 void Player::update()
 {
-    if (speed > 0)
+    //Movement
+    if (xSpeed > 0)
     {
-        speed -= acceleration;
+        xSpeed -= xAcceleration;
     }
-    else if (speed < 0)
+    else if (xSpeed < 0)
     {
-        speed += acceleration;
+        xSpeed += xAcceleration;
     }
-    if(y < normalHeight)
+
+    //Jump physics
+    if (ySpeed > 0)
     {
-        y += 4;
+        y+=ySpeed;
     }
+    else if (ySpeed < 0)
+    {
+        ySpeed += yAcceleration;
+        y+=ySpeed;
+    }
+    
 }
 
 
@@ -110,11 +127,19 @@ int main()
     MainMenu start = MainMenu();
 
     Player test = Player();
-    test.draw();
-    Sleep(1.5);
-    test.jump();
-    LCD.Clear(BLACK);
-    test.draw();
+    
+    for(int i = 0; i < 100; i++)
+    {
+        LCD.Clear(BLACK);
+        test.moveForward();
+        test.update();
+        if(i % 4 == 0)
+        {
+            test.jump();
+        }
+        test.draw();
+        Sleep(100);
+    }
 
     while (true)
     {
