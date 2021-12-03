@@ -3,11 +3,12 @@
 class Platform : public GameObject{
     public:
        Platform();
-       Platform(float, float, float, float);
+       Platform(int, int, int, int);
 
        void draw() override;
-       void changePos(float, float) override;
-       void translate() override;
+       void changePos(int, int) override;
+       bool isInside(int, int) override;
+       bool inContact(GameObject*) override;
     private:
 
 };

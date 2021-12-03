@@ -4,18 +4,19 @@
 class GameObject{
     public:
         GameObject();
-        GameObject(float, float, float, float);
-        GameObject(float, float, float);
+        GameObject(int, int, int, int);
+        GameObject(int, int, int);
         
-        float getXPos();
-        float getYPos();
-        float getHeight();
-        float getWidth();
-        float getRadius();
+        int getXPos();
+        int getYPos();
+        int getHeight();
+        int getWidth();
+        int getRadius();
         
         virtual void draw(){};
-        virtual void changePos(float, float){};
-        virtual void translate(){};
+        virtual void changePos(int, int){};
+        virtual bool isInside(int, int){return NULL;};
+        virtual bool inContact(GameObject*){return NULL;};
     protected:
-        float xpos, ypos, height, width, radius;
+        int xpos, ypos, height, width, radius;
 };

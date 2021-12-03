@@ -5,7 +5,7 @@ Platform::Platform(){
 
 }
 
-Platform::Platform(float xPosition, float yPosition, float h, float w) : GameObject(xPosition, yPosition, h, w){
+Platform::Platform(int xPosition, int yPosition, int h, int w) : GameObject(xPosition, yPosition, h, w){
 
 }
 
@@ -13,7 +13,7 @@ void Platform::draw(){
     LCD.FillRectangle(xpos, ypos, width, height);
 }
 
-void Platform::changePos(float dx, float dy){
+void Platform::changePos(int dx, int dy){
     LCD.SetFontColor(LCD.Black);
     draw();
     xpos += dx;
@@ -22,9 +22,14 @@ void Platform::changePos(float dx, float dy){
     draw();
 }
 
-void Platform::translate(){
-    while(true){
-        Sleep(1.0);
-        break;
+bool Platform::isInside(int x, int y){
+    if((x >= xpos && x <= xpos + width -1) && (y >= ypos && y <= ypos + height -1)){
+        return true;
+    }else{
+        return false;
     }
+}
+
+bool Platform::inContact(GameObject *gameObject){
+    return NULL;
 }

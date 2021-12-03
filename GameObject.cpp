@@ -5,35 +5,35 @@ GameObject::GameObject(){
 
 }
 
-GameObject::GameObject(float xPosition, float yPosition, float h, float w){
+GameObject::GameObject(int xPosition, int yPosition, int h, int w){
     xpos = xPosition;
     ypos = yPosition;
     height = h;
     width = w;
 }
 
-GameObject::GameObject(float xPosition, float yPosition, float rad){
+GameObject::GameObject(int xPosition, int yPosition, int rad){
     xpos = xPosition;
     ypos = yPosition;
     radius = rad;
 }
 
-float GameObject::getXPos(){
+int GameObject::getXPos(){
     return xpos;
 }
 
-float GameObject::getYPos(){
+int GameObject::getYPos(){
     return ypos;
 }
 
-float GameObject::getHeight(){
+int GameObject::getHeight(){
     return height;
 }
 
-float GameObject::getWidth(){
+int GameObject::getWidth(){
     return width;
 }
 
-float GameObject::getRadius(){
+int GameObject::getRadius(){
     return radius;
 }
