@@ -11,9 +11,9 @@ private:
     int playerScore;
     int playerLives;
     double normalHeight = 200;
-    double maxSpeed = 5.5, maxJumpSpeed = -5.0;
+    double maxSpeed = 5.5, maxJumpSpeed = -20.0;
     double xSpeed, ySpeed;
-    double xAcceleration = 5.2, yAcceleration = 10.2;
+    double xAcceleration = 5.2, yAcceleration = -10.2;
     double x, y;
     double time;
 
@@ -63,7 +63,7 @@ void Player::moveForward()
     {
         xSpeed = maxSpeed;
     }
-    x += xSpeed;
+    update();
 }
 
 //Moves the player backward like mario
@@ -74,47 +74,59 @@ void Player::moveBackward()
     {
         xSpeed = -maxSpeed;
     }
-    x += xSpeed;
-    
+    update();    
 }
 
 //Makes the player jump like mario
 void Player::jump()
 {
-    if (y == normalHeight)
+    if(y==normalHeight)
     {
-        ySpeed -= yAcceleration;
-        if(ySpeed < maxJumpSpeed)
-        {
-            ySpeed = maxJumpSpeed;
-        }
+        ySpeed = maxJumpSpeed;
     }
-    y+=ySpeed;
+    update();
 }
 
 //Makes the player deccelerate and fall like mario
 void Player::update()
 {
-    //Movement
+    //X movement
+    x+=xSpeed;
     if (xSpeed > 0)
     {
         xSpeed -= xAcceleration;
+        if (xSpeed < 0)
+        {
+            xSpeed = 0;
+        }
     }
     else if (xSpeed < 0)
     {
         xSpeed += xAcceleration;
+        if (xSpeed > 0)
+        {
+            xSpeed = 0;
+        }
     }
 
-    //Jump physics
-    if (ySpeed > 0)
+    //Y movement
+    y+=ySpeed;
+    if(ySpeed>0 and y>=normalHeight)
     {
-        y+=ySpeed;
+        ySpeed = 0; 
     }
-    else if (ySpeed < 0)
+    else if(ySpeed<0 and y<=normalHeight)
     {
-        ySpeed += yAcceleration;
-        y+=ySpeed;
+        ySpeed = 0;
     }
+    else
+    {
+        ySpeed -= yAcceleration;
+    }
+    
+    
+    
+
     
 }
 
@@ -135,7 +147,9 @@ int main()
         test.update();
         if(i % 4 == 0)
         {
-            test.jump();
+            test.moveBackward();
+            test.moveBackward();
+            // test.jump();
         }
         test.draw();
         Sleep(100);
