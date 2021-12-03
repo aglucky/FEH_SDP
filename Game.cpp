@@ -10,26 +10,35 @@ Game::Game(){
 
 }
 
-/** Public
- * This method will draw both the background and the Game objects to the screen.*/
-void Game::draw(){
+/**
+ * @brief Draws the background and then the GameObjects
+ * 
+ * @param b The background to be drawn
+ * @param gameObjects The GameObjects to be drawn
+ * @param numObjects How many GameObjects are to be drawn
+ */
+void Game::draw(Background b, GameObject *gameObjects[], int numObjects){
+    drawBackground(b);
+    drawObjects(gameObjects, numObjects);
+}
+
+/**
+ * @brief Draws the background of the game
+ * 
+ * @param b Background that contains the information necessary to draw the background
+ */
+void Game::drawBackground(Background b){
 
 }
 
-/** Private
- * This method will draw the background of the game
+/**
+ * @brief Draws the game objects
  * 
- * TO IMPLEMENT_: Take an object "Background" as a parameter?
-*/
-void Game::drawBackground(){
-
-}
-
-/** Private
- * This method will draw the game objects in the game.
- * 
- * To IMPLEMENT_: Take an array of Game objects as a parameter?
-*/
-void Game::drawObjects(){
-
+ * @param gameObjects array of pointers to GameObjects
+ * @param numObjects the number of Objects in the array, the length
+ */
+void Game::drawObjects(GameObject *gameObjects[], int numObjects){
+    for(int i = 0; i < numObjects; i++){
+        gameObjects[i]->draw();
+    }
 }
