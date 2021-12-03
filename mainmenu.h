@@ -10,6 +10,10 @@ class MainMenu
         Button statButton = Button(10,200,100,20,"Stats");
         Button ruleButton = Button(210,100,100,20,"Rules");
         Button creditButton = Button(210,200,100,20,"Credits");
+
+        //PLay mode buttons
+        Button easyButton = Button(10,100,100,20,"Easy");
+        Button hardButton = Button(210,100,100,20,"Hard");
         // Button backButton = Button(200,200,100,20,"Back");
         Button backButton = Button("Back");
         
@@ -20,5 +24,5 @@ class MainMenu
         void drawRules();
         void drawCredits();
         void drawPlay();
-        void menu();
+        int menu();
 };
