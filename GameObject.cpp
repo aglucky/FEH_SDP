@@ -1,28 +1,37 @@
 #include "GameObject.h"
+#include "GameRect.h"
+#include "GameCircle.h"
+
 /* Author: William Comer */
 
 /**
- * @brief Construct a new Game Object:: Game Object object
+ * @brief Create a new game object
  * 
  */
-GameObject::GameObject(){
+GameObject::GameObject(int x, int y))
+{
+   xPos = x;
+    yPos = y;
+}
+
+GameObject::draw{
 
 }
 
+
 /**
- * @brief Construct a new Game Object:: Game Object object with purely rectangular components
+ * @brief Construct a new GameS:: Game Object object with purely rectangular components
  * 
  * @param xPosition The xPosition of the new GameObject
  * @param yPosition The yPosition of the new GameObject
  * @param h The height of the new GameObject
  * @param w The width of the new GameObject
  */
-GameObject::GameObject(int xPosition, int yPosition, int h, int w){
+GameRect::GameRect(int xPosition, int yPosition, int h, int w){
     xpos = xPosition;
     ypos = yPosition;
     height = h;
     width = w;
-    radius = 0;//How do I change this access to private or something similar...?
 }
 
 /**
@@ -36,8 +45,6 @@ GameObject::GameObject(int xPosition, int yPosition, int rad){
     xpos = xPosition;
     ypos = yPosition;
     radius = rad;
-    width = 0;//How do I change this access to private or something similar...?
-    height = 0;//How do I change this access to private or something similar...?
 }
 
 /**
@@ -59,11 +66,20 @@ int GameObject::getYPos(){
 }
 
 /**
+ * @brief Draws the GameObject
+ * 
+ */
+void GameObject::draw(){
+
+LCD.FillRectangle(xpos, ypos, 20, 20);
+}
+
+/**
  * @brief gets the GameObject's height
  * 
  * @return int height
  */
-int GameObject::getHeight(){
+int GameRect::getHeight(){
     return height;
 }
 
@@ -72,8 +88,16 @@ int GameObject::getHeight(){
  * 
  * @return int width
  */
-int GameObject::getWidth(){
+int GameRect::getWidth(){
     return width;
+}
+
+/** 
+ * @brief gets the GameObject's radius
+ * 
+ */
+void GameRect::draw(){
+    LCD.FillRectangle(xpos, ypos, width, height);
 }
 
 /**
@@ -81,6 +105,14 @@ int GameObject::getWidth(){
  * 
  * @return int radius
  */
-int GameObject::getRadius(){
+int GameCircle::getRadius(){
     return radius;
+}
+
+/**
+ * @brief Draws the GameCircle
+ * 
+ */
+void GameCircle::draw(){
+    LCD.FillCircle(xpos, ypos, radius);
 }

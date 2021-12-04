@@ -12,4 +12,5 @@
  */
 Background::Background(){
 
+    GameObject ground = new GameObject();
 }

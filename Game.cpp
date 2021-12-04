@@ -6,39 +6,64 @@ This game class holds the methods that allow for drawing the whole game at once.
 */
 
 /** Empty Constructor*/
-Game::Game(){
+Game::Game(int dif){
+
+    player = new Player();
+    map = new Background();
+    jump = Button( 20,20, 60, 20, "Jump");
+    difficulty = dif;
+
+}
+
+/** Empty Destructor*/
+Game::~Game(){
 
 }
 
 /**
- * @brief Draws the background and then the GameObjects
+ * @brief Draws the game state
  * 
- * @param b The background to be drawn
- * @param gameObjects The GameObjects to be drawn
- * @param numObjects How many GameObjects are to be drawn
  */
-void Game::draw(Background b, GameObject *gameObjects[], int numObjects){
-    drawBackground(b);
-    drawObjects(gameObjects, numObjects);
+void Game::draw(){
+
+    map.draw();
+    player.draw();
 }
 
-/**
- * @brief Draws the background of the game
- * 
- * @param b Background that contains the information necessary to draw the background
- */
-void Game::drawBackground(Background b){
+void Game::play(){
 
-}
+    float x,y;
+     while (true)
+    {
+        jump.draw();
+        player.draw();
 
-/**
- * @brief Draws the game objects
- * 
- * @param gameObjects array of pointers to GameObjects
- * @param numObjects the number of Objects in the array, the length
- */
-void Game::drawObjects(GameObject *gameObjects[], int numObjects){
-    for(int i = 0; i < numObjects; i++){
-        gameObjects[i]->draw();
+        while (!LCD.Touch(&x, &y))
+        {
+            player.update();
+            Sleep(10);
+            LCD.Clear();
+            jump.draw();
+            player.draw();
+            player.draw();
+            
+        }
+
+        if (jump.isPressed(x, y))
+        {
+            player.jump();
+        }
+        LCD.Clear();
+
+        else if (x<120)
+        {
+            player.moveBackward();
+        }
+
+        else if (x>120)
+        {
+            player.moveForward();
+        }
     }
+
 }

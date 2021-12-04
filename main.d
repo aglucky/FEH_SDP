@@ -1,6 +1,7 @@
 main.o: main.cpp simulator_libraries/FEHLCD.h \
  simulator_libraries/LCDColors.h simulator_libraries/FEhUtility.h \
- mainmenu.h usertools.h player.h
+ mainmenu.h usertools.h player.h Game.h Background.h GameObject.h \
+ player.h usertools.h
 
 simulator_libraries/FEHLCD.h:
 
@@ -13,3 +14,13 @@ mainmenu.h:
 usertools.h:
 
 player.h:
+
+Game.h:
+
+Background.h:
+
+GameObject.h:
+
+player.h:
+
+usertools.h:

@@ -1,13 +1,20 @@
 /* Author: William Comer */
-#include "GameObject.h"
+
 #include "Background.h"
+#include "player.h"
+#include "usertools.h"
+
 
 class Game{
     public:
-        Game();
-        void draw(Background, GameObject *[], int);
+        Game(int difficulty);
+        void draw();
+        void update();
+        void play();
     private:
-        void drawBackground(Background);
-        void drawObjects(GameObject *[], int);
+        Player player;
+        Background map;
+        Button jumpButton;
+        int difficulty;
 
 };
