@@ -15,8 +15,8 @@
 
 Background::Background()
 {
-    ground = GameObject(1,1,1,1);
 }
 void Background::draw()
 {
+    ground.draw();
 }
