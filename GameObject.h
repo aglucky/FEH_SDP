@@ -13,3 +13,4 @@ public:
 private:
     int x,y,width,height;
 };
+

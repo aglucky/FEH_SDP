@@ -25,6 +25,7 @@ GameObject:: GameObject(int xPosition, int yPosition, int h, int w){
  * 
  */
 void GameObject::draw(){
+    LCD.SetFontColor(GREEN);
     LCD.FillRectangle(x, y, width, height);
 }
 
