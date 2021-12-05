@@ -8,7 +8,5 @@ class Background{
     public:
         Background();
         void draw();
-        GameObject ground = GameObject(0,0,100,100);
-
-
+        GameObject ground = GameObject(0,240,100,100);
 };

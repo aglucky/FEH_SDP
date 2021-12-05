@@ -4,9 +4,7 @@
 class GameObject
 {
 public:
-    GameObject();
-    GameObject(int x, int y, int width, int height);
-
+    GameObject(int x, int y, int height, int width);
     void draw();
     // virtual void changePos(int, int){};
     // virtual bool isInside(int, int) { return NULL; };
