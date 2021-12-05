@@ -40,7 +40,6 @@ Button::Button(string nm)
  */
 void Button::draw()
 {
-    LCD.DrawRectangle(x, y, width, height);
     LCD.SetFontColor(BLUE);
     LCD.FillRectangle(x, y, width, height);
     LCD.SetFontColor(WHITE);

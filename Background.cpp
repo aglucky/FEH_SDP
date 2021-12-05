@@ -16,6 +16,7 @@
 Background::Background()
 {
 }
+
 void Background::draw()
 {
     ground.draw();

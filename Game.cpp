@@ -21,7 +21,7 @@ void Game::draw(){
 
     map.draw();
     player.draw();
-    map.ground.draw();
+    jump.draw();
 }
 
 void Game::play(){
@@ -29,17 +29,14 @@ void Game::play(){
     float x,y;
      while (true)
     {
-        jump.draw();
-        player.draw();
+        draw();
 
         while (!LCD.Touch(&x, &y))
         {
             player.update();
             Sleep(10);
             LCD.Clear();
-            jump.draw();
-            player.draw();
-            player.draw();
+            draw();
             
         }
 
