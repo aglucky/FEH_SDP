@@ -55,7 +55,7 @@ void Player::jump()
 {
     if (y == normalHeight)
     {
-        ySpeed = maxJumpSpeed;
+        ySpeed = -maxJumpSpeed;
     }
     update();
 }
@@ -89,7 +89,7 @@ void Player::update()
     }
     y += ySpeed / 2;
 
-    if (y <= normalHeight)
+    if (y >= normalHeight)
     {
         ySpeed = 0;
         y = normalHeight;
