@@ -1,6 +1,14 @@
 #include "usertools.h"
 
-//Creates a button with a set position and size
+/**
+ * @brief Construct a new Button:: Button object
+ * 
+ * @param xNew x position of the button
+ * @param yNew y position of the button
+ * @param widthNew width of the button
+ * @param heightNew height of the button
+ * @param nm The text displayed on the button
+ */
 Button::Button(float xNew, float yNew, float widthNew, float heightNew, string nm)
 {
     x = xNew;
@@ -10,7 +18,12 @@ Button::Button(float xNew, float yNew, float widthNew, float heightNew, string n
     name = nm;
 }
 
-//Creates a button with pre-set position and size based on name
+
+/**
+ * @brief Construct a new Button:: Button object in the bottom right corner
+ * 
+ * @param nm The text displayed on the button
+ */
 Button::Button(string nm)
 {
     name = nm;
@@ -20,7 +33,11 @@ Button::Button(string nm)
     y = (240 - height);
 }
  
-//Shows the button on LCD
+
+/**
+ * @brief Draw the button
+ * 
+ */
 void Button::draw()
 {
     LCD.DrawRectangle(x, y, width, height);
@@ -32,7 +49,13 @@ void Button::draw()
     
 }
 
-//Returns whether a button has been pressed
+/**
+ * @brief Returns whether the button has been pressed
+ * 
+ * @param xTouch x position of the touch
+ * @param yTouch y position of the touch
+ * @return true/false on whether button has been pressed
+ */
 bool Button::isPressed(float xTouch, float yTouch)
 {
     if(xTouch >= x && xTouch <= x+width && yTouch >= y && yTouch <= y+height)
