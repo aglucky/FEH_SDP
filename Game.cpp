@@ -21,6 +21,7 @@ void Game::draw(){
 
     map.draw();
     player.draw();
+    map.ground.draw();
 }
 
 void Game::play(){

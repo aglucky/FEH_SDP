@@ -1,14 +1,15 @@
 #include "GameObject.h"
-/* Author: William Comer */
 
-/* PLACEHOLDER OBJECT NEEDING IMPLEMENTATION*/
+/**
+ * @brief Handles everything related to the background.
+ * 
+ */
 class Background{
     public:
         Background();
         void draw();
         void addElement(GameObject*);
-    private:
-        GameObject ground = GameObject();
+        GameObject ground = GameObject(0,0,40,40);
         GameObject elements[50];
 
 
