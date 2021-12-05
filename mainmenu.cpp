@@ -1,9 +1,15 @@
 #include "mainmenu.h"
 
-// Initialize the main menu
+/**
+ * @brief Construct a new Main Menu:: Main Menu object
+ * 
+ */
 MainMenu::MainMenu() {}
 
-// Displays the main menu on the LCD
+/**
+ * @brief Draws the main menu screen
+ * 
+ */
 void MainMenu::drawMain()
 {
     LCD.SetBackgroundColor(RED);
@@ -16,7 +22,10 @@ void MainMenu::drawMain()
     creditButton.draw();
 }
 
-// Draws the stat subpage
+/**
+ * @brief Draws the statistic screen
+ * 
+ */
 void MainMenu::drawStats()
 {
     LCD.SetBackgroundColor(ORANGE);
@@ -24,7 +33,10 @@ void MainMenu::drawStats()
     backButton.draw();
 }
 
-// Draws the rules subpage
+/**
+ * @brief Draws the rules screen
+ * 
+ */
 void MainMenu::drawRules()
 {
     LCD.SetBackgroundColor(GREEN);
@@ -32,7 +44,10 @@ void MainMenu::drawRules()
     backButton.draw();
 }
 
-// Draws the credits subpage
+/**
+ * @brief Draws the credits screen
+ * 
+ */
 void MainMenu::drawCredits()
 {
     LCD.SetBackgroundColor(YELLOW);
@@ -40,7 +55,10 @@ void MainMenu::drawCredits()
     backButton.draw();
 }
 
-// Draws the play subpage
+/**
+ * @brief Draws the select difficulty screen screen
+ * 
+ */
 void MainMenu::drawPlay()
 {
     LCD.SetBackgroundColor(INDIGO);
@@ -50,7 +68,11 @@ void MainMenu::drawPlay()
     hardButton.draw();
 }
 
-// Allows main menu to be used by player
+/**
+ * @brief Allows user to interact with the main menu
+ * 
+ * @return Difficulty level of the game 
+ */
 int MainMenu::menu()
 {
     drawMain();
