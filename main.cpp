@@ -1,7 +1,6 @@
 #include "FEHLCD.h"
 #include "FEhUtility.h"
-#include <mainmenu.h>
-#include <player.h>
+#include "mainmenu.h"
 #include "Game.h"
 using namespace std;
 

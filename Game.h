@@ -2,7 +2,6 @@
 
 #include "Background.h"
 #include "player.h"
-#include "usertools.h"
 
 class Game
 {
