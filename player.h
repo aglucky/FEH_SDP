@@ -1,6 +1,4 @@
 
-#include <math.h>
-
 /**
  * @brief Handles everything related to the player.
  * 
