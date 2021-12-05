@@ -5,7 +5,10 @@
 #include "FEhUtility.h"
 
 
-// Create a new player
+/**
+ * @brief Construct a new Player:: Player object
+ * 
+ */
 Player::Player()
 {
     playerScore = 0;
@@ -15,20 +18,29 @@ Player::Player()
     time = 0;
 }
 
-// Destructor
+/**
+ * @brief Destroy the Player:: Player object
+ * 
+ */
 Player::~Player()
 {
     // Nothing to do here
 }
 
-// Draw the player as a rectangle
+/**
+ * @brief Draws the player on the LCD
+ * 
+ */
 void Player::draw()
 {
     LCD.SetFontColor(BLUE);
     LCD.FillRectangle(x, y, 20, 30);
 }
 
-// Moves the player forawrd like mario
+/**
+ * @brief Moves the player right on the LCD
+ * 
+ */
 void Player::moveForward()
 {
     xSpeed += xAcceleration;
@@ -39,7 +51,10 @@ void Player::moveForward()
     update();
 }
 
-// Moves the player backward like mario
+/**
+ * @brief Moves the player left on the LCD
+ * 
+ */
 void Player::moveBackward()
 {
     xSpeed -= xAcceleration;
@@ -50,7 +65,10 @@ void Player::moveBackward()
     update();
 }
 
-// Makes the player jump like mario
+/**
+ * @brief Makes the player jump
+ * 
+ */
 void Player::jump()
 {
     if (y == normalHeight)
@@ -60,7 +78,10 @@ void Player::jump()
     update();
 }
 
-// Makes the player deccelerate and fall like mario
+/**
+ * @brief Updates the players position and speed
+ * 
+ */
 void Player::update()
 {
     // X movement

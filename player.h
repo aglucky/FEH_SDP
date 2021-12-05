@@ -1,6 +1,10 @@
 
 #include <math.h>
 
+/**
+ * @brief Handles everything related to the player.
+ * 
+ */
 class Player
 {
 private:
