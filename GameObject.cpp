@@ -1,6 +1,5 @@
 #include "GameObject.h"
-#include "GameRect.h"
-#include "GameCircle.h"
+
 
 /* Author: William Comer */
 
@@ -8,15 +7,13 @@
  * @brief Create a new game object
  * 
  */
-GameObject::GameObject(int x, int y))
+GameObject::GameObject(int x, int y)
 {
-   xPos = x;
-    yPos = y;
+   xpos = x;
+    ypos = y;
 }
 
-GameObject::draw{
 
-}
 
 
 /**
@@ -27,7 +24,7 @@ GameObject::draw{
  * @param h The height of the new GameObject
  * @param w The width of the new GameObject
  */
-GameRect::GameRect(int xPosition, int yPosition, int h, int w){
+GameRect:: public GameRect(int xPosition, int yPosition, int h, int w){
     xpos = xPosition;
     ypos = yPosition;
     height = h;
@@ -41,7 +38,7 @@ GameRect::GameRect(int xPosition, int yPosition, int h, int w){
  * @param yPosition The yPosition of the new GameObject
  * @param rad The radius of the new GameObject
  */
-GameObject::GameObject(int xPosition, int yPosition, int rad){
+GameObject:: public GameCircle(int xPosition, int yPosition, int rad){
     xpos = xPosition;
     ypos = yPosition;
     radius = rad;

@@ -10,10 +10,10 @@ public:
     int getXPos();
     int getYPos();
 
-    virtual void draw(){};
-    virtual void changePos(int, int){};
-    virtual bool isInside(int, int) { return NULL; };
-    virtual bool inContact(GameObject *) { return NULL; };
+    // virtual void draw(){};
+    // virtual void changePos(int, int){};
+    // virtual bool isInside(int, int) { return NULL; };
+    // virtual bool inContact(GameObject *) { return NULL; };
 
 protected:
     int xpos, ypos;

@@ -12,5 +12,6 @@
  */
 Background::Background(){
 
-    GameObject ground = new GameObject();
+}
+void Background::draw(){
 }
