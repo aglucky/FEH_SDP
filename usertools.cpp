@@ -44,7 +44,7 @@ void Button::draw()
     LCD.SetFontColor(BLUE);
     LCD.FillRectangle(x, y, width, height);
     LCD.SetFontColor(WHITE);
-    LCD.WriteAt(name.c_str(), x+5, y+2);
+    LCD.WriteAt(name.c_str(), x+abs(name.length()*12-width)/2, y+2);
     LCD.SetFontColor(BLUE);
     
 }
