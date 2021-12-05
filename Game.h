@@ -1,7 +1,6 @@
-/* Author: William Comer */
-
 #include "Background.h"
 #include "player.h"
+#include "usertools.h"
 
 class Game
 {
@@ -14,6 +13,6 @@ public:
 private:
     Player player = Player();
     Background map = Background();
-    Button jump = Button(20, 20, 60, 20, "Jump");
+    Button jump = Button(0, 0, 0 ,0, "Jump");
     int difficulty;
 };

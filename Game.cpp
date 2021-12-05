@@ -1,7 +1,5 @@
 #include "Game.h"
 
-/* Author: William Comer */
-
 /*
 This game class holds the methods that allow for drawing the whole game at once.
 */
@@ -9,7 +7,7 @@ This game class holds the methods that allow for drawing the whole game at once.
 /** Empty Constructor*/
 Game::Game(int dif){
 
-    
+    jump = Button(120, 20, 60, 20, "Jump");
     difficulty = dif;
 
 }
