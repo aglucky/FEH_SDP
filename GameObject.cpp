@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include <exception>
+#include <iostream>
 /* Author: William Comer */
 
 /**
@@ -6,38 +8,50 @@
  * 
  */
 GameObject::GameObject(){
-
+        //NEED TO IMPLEMENT A DEFAULT IMAGE
 }
 
-/**
- * @brief Construct a new Game Object:: Game Object object with purely rectangular components
- * 
- * @param xPosition The xPosition of the new GameObject
- * @param yPosition The yPosition of the new GameObject
- * @param h The height of the new GameObject
- * @param w The width of the new GameObject
- */
-GameObject::GameObject(int xPosition, int yPosition, int h, int w){
-    xpos = xPosition;
-    ypos = yPosition;
-    height = h;
-    width = w;
-    radius = 0;//How do I change this access to private or something similar...?
+GameObject::GameObject(const char *imageFilePath, int x, int y){
+    try
+    {
+        image.Open(imageFilePath);
+        width = image.getCol();
+        height = image.getRows();
+        xpos = x;
+        ypos = y;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
-/**
- * @brief Construct a new Game Object:: Game Object object with a radius
- * 
- * @param xPosition The xPosition of the new GameObject
- * @param yPosition The yPosition of the new GameObject
- * @param rad The radius of the new GameObject
- */
-GameObject::GameObject(int xPosition, int yPosition, int rad){
-    xpos = xPosition;
-    ypos = yPosition;
-    radius = rad;
-    width = 0;//How do I change this access to private or something similar...?
-    height = 0;//How do I change this access to private or something similar...?
+void GameObject::draw(){
+    image.Draw(xpos, ypos);
+}
+
+void GameObject::changePos(int dx, int dy){
+    xpos += dx;
+    ypos += dy;
+}
+        
+bool GameObject::isInside(int x, int y){
+    if((x >= xpos && x <= xpos + width -1) && (y >= ypos && y <= ypos + height -1)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool GameObject::inContact(GameObject* gameObject){
+       for(int x = xpos; x <= width; x++){
+        for(int y = ypos; y <= height; y++){
+            if(gameObject->isInside(x, y)){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 /**
@@ -76,11 +90,3 @@ int GameObject::getWidth(){
     return width;
 }
 
-/**
- * @brief gets the GameObject's radius
- * 
- * @return int radius
- */
-int GameObject::getRadius(){
-    return radius;
-}

@@ -1,13 +1,14 @@
 #include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\simulator_libraries\FEHLCD.h"
 #include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\simulator_libraries\FEHUtility.h"
+#include "FEHImages.h"
+#include <string>
 
 /* Author: William Comer */
 
 class GameObject{
     public:
         GameObject();
-        GameObject(int, int, int, int);
-        GameObject(int, int, int);
+        GameObject(const char *, int, int);
         
         int getXPos();
         int getYPos();
@@ -15,10 +16,11 @@ class GameObject{
         int getWidth();
         int getRadius();
         
-        virtual void draw(){};
-        virtual void changePos(int, int){};
-        virtual bool isInside(int, int){return NULL;};
-        virtual bool inContact(GameObject*){return NULL;};
+        void draw();
+        void changePos(int, int);
+        bool isInside(int, int);
+        bool inContact(GameObject*);
     protected:
-        int xpos, ypos, height, width, radius;
+        int xpos, ypos, height, width;
+        FEHIMAGE image;
 };
