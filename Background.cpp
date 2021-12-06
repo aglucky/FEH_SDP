@@ -11,8 +11,6 @@
  * NEED TO IMPLEMENT
  *
  */
-
-
 Background::Background()
 {
     ground = GameObject(0,190,50,320);
