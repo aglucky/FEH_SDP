@@ -18,7 +18,7 @@ int main()
     float x, y;
     int difficulty;
 
-    GameObject hello = GameObject("UnicornFEH.pic", 100, 0);
+    GameObject hello = GameObject("UnicornFEH.pic", 0, 0);
     hello.draw();
     LCD.Update();
     while(true){   
