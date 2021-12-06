@@ -43,7 +43,7 @@ void Button::draw()
     LCD.SetFontColor(BLUE);
     LCD.FillRectangle(x, y, width, height);
     LCD.SetFontColor(WHITE);
-    LCD.WriteAt(name.c_str(), x+abs(name.length()*12-width)/2, y+2);
+    LCD.WriteAt(name.c_str(), x+std::abs(name.length()*12-width)/2, y+2);
     LCD.SetFontColor(BLUE);
     
 }

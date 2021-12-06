@@ -22,6 +22,7 @@ void Game::draw(){
     map.draw();
     player.draw();
     jump.draw();
+    backButton.draw();
 }
 
 void Game::play(){
@@ -55,7 +56,9 @@ void Game::play(){
             player.moveForward();
         }
                 LCD.Clear();
-
+        if(backButton.isPressed(x, y)){
+            start.menu();
+        }
     }
 
 }
