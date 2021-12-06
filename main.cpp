@@ -1,7 +1,8 @@
 #include "FEHLCD.h"
 #include "FEhUtility.h"
-#include <mainmenu.h>
-#include <player.h>
+#include "mainmenu.h"
+#include "player.h"
+#include "FEHImages.h"
 using namespace std;
 
 
@@ -17,6 +18,17 @@ int main()
     float x, y;
     int difficulty;
 
+    FEHIMAGE testImage = FEHIMAGE();
+    testImage.Open("UnicornFEH.pic");
+    testImage.Draw(0, 0);
+    LCD.Update();
+    while(true){   
+        Sleep(2.0);   
+        break;
+    
+    }
+    
+    
     // Start the game
     difficulty = start.menu();
     
@@ -62,5 +74,6 @@ int main()
         LCD.Update();
     }
     return 0;
+    
     
 }

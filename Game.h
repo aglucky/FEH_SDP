@@ -1,6 +1,6 @@
 /* Author: William Comer */
-#include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\Game\GameObject\GameObject.h"
-#include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\Game\Background\Background.h"
+#include "GameObject.h"
+#include "Background.h"
 
 class Game{
     public:
