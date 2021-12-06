@@ -1,6 +1,6 @@
 #include "Background.h"
 #include "player.h"
-#include "usertools.h"
+#include "mainmenu.h"
 
 class Game
 {
@@ -14,5 +14,7 @@ private:
     Player player = Player();
     Background map = Background();
     Button jump = Button(0, 0, 0 ,0, "Jump");
+    Button backButton = Button("Back");
+    MainMenu start = MainMenu();
     int difficulty;
 };

@@ -53,7 +53,9 @@ void MainMenu::drawRules()
 {
     LCD.SetBackgroundColor(GREEN); 
     LCD.Clear();
+    LCD.SetFontColor(BLACK);
     LCD.WriteAt("RULES", 130, 50);
+    LCD.SetFontColor(BLUE);
     LCD.WriteAt("1. Don't Get Touched.", 10, 80);
     LCD.WriteAt("2. STOMP Enemies by", 10, 100);
     LCD.WriteAt("jumping on top of them.", 15, 120);
