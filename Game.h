@@ -9,5 +9,4 @@ class Game{
     private:
         void drawBackground(Background);
         void drawObjects(GameObject *[], int);
-
 };
