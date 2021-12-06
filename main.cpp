@@ -6,7 +6,13 @@ using namespace std;
 
 int main()
 {
-
+    GameObject test = GameObject("groundFEH.pic", 0, 220);
+    test.draw();
+    while(true){
+        Sleep(2.0);
+        break;
+    }
+/*
     // Create nessesary objects
     MainMenu start = MainMenu();
     Player test = Player();
@@ -21,4 +27,5 @@ int main()
         game.play();
     }
     return 0;
+    */
 }

@@ -13,10 +13,10 @@
  */
 Background::Background()
 {
-    //ground = GameObject(0,190,50,320);
+    ground = GameObject("groundFEH.pic", 0, 20);
 }
 
 void Background::draw()
 {
-    //ground.draw();
+    ground.draw();
 }
