@@ -1,6 +1,8 @@
 
-#include <math.h>
-
+/**
+ * @brief Handles everything related to the player.
+ * 
+ */
 class Player
 {
 private:
@@ -10,7 +12,7 @@ private:
     double normalHeight = 160;
     double maxSpeed = 5.5, maxJumpSpeed = 14.0;
     double xSpeed, ySpeed;
-    double xAcceleration = 5.2, yAcceleration = -2.2;
+    double xAcceleration = 5.2, yAcceleration = 2.2;
     double x, y;
     double time;
 

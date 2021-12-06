@@ -1,10 +1,12 @@
+#include "GameObject.h"
 
-/* Author: William Comer */
-
-/* PLACEHOLDER OBJECT NEEDING IMPLEMENTATION*/
+/**
+ * @brief Handles everything related to the background.
+ * 
+ */
 class Background{
     public:
         Background();
-    private:
-
+        void draw();
+        GameObject ground;
 };

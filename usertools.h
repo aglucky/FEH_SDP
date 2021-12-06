@@ -4,7 +4,10 @@
 
 using namespace std;
 
-//Class for everything related to buttons
+/**
+ * @brief Handles everything related to buttons
+ * 
+ */
 class Button
 {
     private:
@@ -20,4 +23,3 @@ class Button
         bool isPressed(float, float);
         void draw();
 };
-
