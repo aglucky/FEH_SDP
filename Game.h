@@ -11,7 +11,10 @@ public:
     void play();
 
 private:
-    Player player = Player();
+    bool collisionResult(Player, GameObject*);
+    void collisionCheck(Player, GameObject *[], int);
+
+    Player player = Player("basicPlayerFEH.pic", 160, 220);
     Background map = Background();
     Button jump = Button(0, 0, 0 ,0, "Jump");
     Button backButton = Button("Back");

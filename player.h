@@ -1,9 +1,9 @@
-
+#include "GameObject.h"
 /**
  * @brief Handles everything related to the player.
  * 
  */
-class Player
+class Player : public GameObject
 {
 private:
     // Player stats and state variables
@@ -19,6 +19,7 @@ private:
 public:
     // Constructor and instance methods
     Player();
+    Player(const char *, int, int);
     // Destructor
     ~Player();
     void moveForward();
@@ -28,5 +29,4 @@ public:
     void isDead();
     void startTimer();
     void update();
-    void draw();
 };

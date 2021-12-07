@@ -62,3 +62,23 @@ void Game::play(){
     }
 
 }
+/**
+ * @brief Returns the result of a player's collison with a Game Object.
+ * 
+ * @param p Player Object
+ * @param e Enemy Object
+ * @return true if the collision doesn't result in the player losing a life
+ * @return false if the collsion results in the player losing a life
+ */
+ bool Game::collisionResult(Player p, GameObject *gameObject){
+    if(p.inContact(gameObject) && ((p.getYPos() + p.getHeight()/3) < gameObject->getYPos())){
+        return true;
+    }else{
+        return false;
+    }
+ }
+void Game::collisionCheck(Player p, GameObject *gameObjects[], int numEnemies){
+    for(int i = 0; i < numEnemies; i++){
+        collisionResult(p, gameObjects[i]);
+    }
+}

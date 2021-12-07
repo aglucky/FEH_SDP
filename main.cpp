@@ -11,6 +11,7 @@ int main()
     MainMenu start = MainMenu();
     Player test = Player();
     int difficulty;
+    start.menu();
 
     // Start the game
     while(true)

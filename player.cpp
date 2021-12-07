@@ -18,6 +18,9 @@ Player::Player()
     time = 0;
 }
 
+Player::Player(const char *imageFilePath, int ix, int iy) : GameObject(imageFilePath, ix, iy){
+    Player();
+}
 /**
  * @brief Destroy the Player:: Player object
  * 
@@ -25,16 +28,6 @@ Player::Player()
 Player::~Player()
 {
     // Nothing to do here
-}
-
-/**
- * @brief Draws the player on the LCD
- * 
- */
-void Player::draw()
-{
-    LCD.SetFontColor(BLUE);
-    LCD.FillRectangle(x, y, 20, 30);
 }
 
 /**
