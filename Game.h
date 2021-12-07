@@ -1,6 +1,7 @@
 #include "Background.h"
 #include "player.h"
 #include "mainmenu.h"
+#include "Enemy.h"
 
 class Game
 {
@@ -13,11 +14,12 @@ public:
 private:
     bool collisionResult(Player, GameObject*);
     void collisionCheck(Player, GameObject *[], int);
+    void addEnemy();
 
     Player player;
     Button jump = Button(0, 20, 320, 20, "Jump");
     Background map = Background();
     Button backButton = Button("Back");
-    MainMenu start = MainMenu();
+    Enemy enemies[50];
     int difficulty;
 };

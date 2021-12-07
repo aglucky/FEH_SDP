@@ -11,6 +11,7 @@ class GameObject{
     public:
         GameObject();
         GameObject(const char *, int, int);
+        ~GameObject();
         
         int getXPos();
         int getYPos();

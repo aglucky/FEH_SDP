@@ -16,6 +16,9 @@ GameObject::GameObject(const char *imageFilePath, int x, int y){
         ypos = y;
         setImage(imageFilePath);
 }
+GameObject::~GameObject(){
+    //image.Close();
+}
 
 void GameObject::setImage(const char *imageFilePath){
     try

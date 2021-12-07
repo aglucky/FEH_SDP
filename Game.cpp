@@ -9,7 +9,9 @@ Game::Game(int dif){
 
     player = Player(dif, "bryce1FEH1.pic", "bryce2FEH2.pic", 160, 185);
     difficulty = dif;
-
+    for(int i = 0; i < 50; i++){
+        enemies[i] = Enemy("basicEnemyFEH.pic", 160 , 185);
+    }
 }
 
 
@@ -18,11 +20,15 @@ Game::Game(int dif){
  * 
  */
 void Game::draw(){
-
+    
     map.draw();
     player.draw();
     jump.draw();
     backButton.draw();
+    for(int i = 0; i < 50; i++){
+        enemies[i].draw();
+    }
+    
 }
 
 void Game::play(){
@@ -57,7 +63,9 @@ void Game::play(){
         }
                 LCD.Clear();
         if(backButton.isPressed(x, y)){
-            start.menu();
+            player.~Player();
+            //Need to prevent additional memory leaks??
+            return;
         }
         
     }
