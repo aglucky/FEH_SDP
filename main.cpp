@@ -7,6 +7,7 @@ using namespace std;
 int main()
 {
 
+    
     // Create nessesary objects
     MainMenu start = MainMenu();
     Player test = Player();

@@ -14,7 +14,7 @@ private:
     bool collisionResult(Player, GameObject*);
     void collisionCheck(Player, GameObject *[], int);
 
-    Player player = Player("basicPlayerFEH.pic", 160, 220);
+    Player player = Player("basicPlayerFEH.pic", 160, 185);
     Background map = Background();
     Button jump = Button(0, 0, 0 ,0, "Jump");
     Button backButton = Button("Back");
