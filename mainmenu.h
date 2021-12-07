@@ -28,4 +28,7 @@ class MainMenu
         void drawCredits();
         void drawPlay();
         int menu();
+    
+    private:
+    
 };

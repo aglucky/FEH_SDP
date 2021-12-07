@@ -4,6 +4,8 @@
 #include "FEHLCD.h"
 #include "FEhUtility.h"
 
+#define EASY 1
+#define HARD 2
 
 /**
  * @brief Construct a new Player:: Player object
@@ -13,13 +15,23 @@ Player::Player()
 {
     playerScore = 0;
     playerLives = 3;
-    x = 10;
-    y = normalHeight - 20;
+    xpos = 10;
+    ypos = normalHeight - 20;
     time = 0;
 }
 
-Player::Player(const char *imageFilePath, int ix, int iy) : GameObject(imageFilePath, ix, iy){
+Player::Player(int difficulty,const char *imageFilePath, int ix, int iy) : GameObject(imageFilePath, ix, iy){
     Player();
+    switch (difficulty){
+        case EASY:
+            playerLives = 5;
+            break;
+        case HARD:
+            playerLives = 3;
+            break;
+        default:
+            playerLives = 0;
+    }
 }
 /**
  * @brief Destroy the Player:: Player object
@@ -64,7 +76,7 @@ void Player::moveBackward()
  */
 void Player::jump()
 {
-    if (y == normalHeight)
+    if (ypos == normalHeight)
     {
         ySpeed = -maxJumpSpeed;
     }
@@ -78,7 +90,7 @@ void Player::jump()
 void Player::update()
 {
     // X movement
-    x += xSpeed;
+    xpos += xSpeed;
     if (xSpeed > 0)
     {
         xSpeed -= xAcceleration;
@@ -101,12 +113,12 @@ void Player::update()
     {
         ySpeed += yAcceleration / 2;
     }
-    y += ySpeed / 2;
+    ypos += ySpeed / 2;
 
-    if (y >= normalHeight)
+    if (ypos >= normalHeight)
     {
         ySpeed = 0;
-        y = normalHeight;
+        ypos = normalHeight;
     }
 
     if (abs(ySpeed) > maxJumpSpeed)

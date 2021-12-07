@@ -111,6 +111,7 @@ int MainMenu::menu()
 
     // Game Loop
     float x, y;
+    
     while (true)
     {
         while (!LCD.Touch(&x, &y))
@@ -145,7 +146,7 @@ int MainMenu::menu()
                 
             }
         }
-        else if (statButton.isPressed(x, y))
+        else if (statButton.isPressed(x, y)) 
         {
             drawStats();
             while (1)

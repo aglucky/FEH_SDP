@@ -9,7 +9,7 @@ private:
     // Player stats and state variables
     int playerScore;
     int playerLives;
-    double normalHeight = 160;
+    double normalHeight = 195;
     double maxSpeed = 5.5, maxJumpSpeed = 14.0;
     double xSpeed, ySpeed;
     double xAcceleration = 5.2, yAcceleration = 2.2;
@@ -19,7 +19,7 @@ private:
 public:
     // Constructor and instance methods
     Player();
-    Player(const char *, int, int);
+    Player(int,const char *, int, int);
     // Destructor
     ~Player();
     void moveForward();

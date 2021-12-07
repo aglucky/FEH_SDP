@@ -14,9 +14,9 @@ private:
     bool collisionResult(Player, GameObject*);
     void collisionCheck(Player, GameObject *[], int);
 
-    Player player = Player("basicPlayerFEH.pic", 160, 185);
+    Player player;
+    Button jump = Button(0, 20, 320, 20, "Jump");
     Background map = Background();
-    Button jump = Button(0, 0, 0 ,0, "Jump");
     Button backButton = Button("Back");
     MainMenu start = MainMenu();
     int difficulty;

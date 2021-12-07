@@ -22,7 +22,7 @@ class GameObject{
         void changePos(int, int);
         bool isInside(int, int);
         bool inContact(GameObject*);
-    private:
+    protected:
         int xpos, ypos, height, width;
         FEHIMAGE image;
 };
