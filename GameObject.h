@@ -24,5 +24,6 @@ class GameObject{
         bool inContact(GameObject*);
     protected:
         int xpos, ypos, height, width;
+        void setImage(const char *);
         FEHIMAGE image;
 };

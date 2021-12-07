@@ -20,8 +20,10 @@ Player::Player()
     time = 0;
 }
 
-Player::Player(int difficulty,const char *imageFilePath, int ix, int iy) : GameObject(imageFilePath, ix, iy){
+Player::Player(int difficulty,const char *imageFilePath1, const char *imageFilePath2, int ix, int iy) : GameObject(imageFilePath1, ix, iy){
     Player();
+    imgFP1 = imageFilePath1;
+    imgFP2 = imageFilePath2;
     switch (difficulty){
         case EASY:
             playerLives = 5;
@@ -89,6 +91,13 @@ void Player::jump()
  */
 void Player::update()
 {
+        if(imageDisp <= 15){
+            setImage(imgFP1);
+        }else{
+            setImage(imgFP2);
+        }
+    ++imageDisp;
+    imageDisp = imageDisp % 30;
     // X movement
     xpos += xSpeed;
     if (xSpeed > 0)
@@ -126,3 +135,16 @@ void Player::update()
         ySpeed = maxJumpSpeed;
     }
 }
+
+void Player::loseLife(){
+    --playerLives;
+}
+
+bool Player::isDead(){
+    if(playerLives <= 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+

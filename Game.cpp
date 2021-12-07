@@ -7,7 +7,7 @@ This game class holds the methods that allow for drawing the whole game at once.
 /** Empty Constructor*/
 Game::Game(int dif){
 
-    player = Player(dif, "bryce1FEH.pic", 160, 185);
+    player = Player(dif, "bryce1FEH1.pic", "bryce2FEH2.pic", 160, 185);
     difficulty = dif;
 
 }
@@ -59,6 +59,7 @@ void Game::play(){
         if(backButton.isPressed(x, y)){
             start.menu();
         }
+        
     }
 
 

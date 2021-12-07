@@ -12,10 +12,14 @@ GameObject::GameObject(){
 }
 
 GameObject::GameObject(const char *imageFilePath, int x, int y){
-    try
-    {
         xpos = x;
         ypos = y;
+        setImage(imageFilePath);
+}
+
+void GameObject::setImage(const char *imageFilePath){
+    try
+    {
         image.Open(imageFilePath);
         width = image.getCol();
         height = image.getRows();
