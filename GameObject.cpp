@@ -64,21 +64,22 @@ bool GameObject::inContact(GameObject* gameObject){
 /**
  * @brief Checks if two gameObjects are colliding
  * 
- * Algorithm taken from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+ * Algorithm learned from:
+ * @cite label://www.jeffreythompson.org/collision-detection/rect-rect.php
  * 
  * @param gameObject 
  * @return true if colliding
  * @return false if not colliding
  */
-bool GameObject::isColliding(GameObject gameObject){
+bool GameObject::isColliding(GameObject gameObject1, GameObject gameObject2){
     bool a = false, b = false, c = false, d = false;
-    if(xpos + width > gameObject.getXPos())
+    if(gameObject2.getXPos() + gameObject2.getWidth() >= gameObject1.getXPos())
     a = true;
-    if(xpos > gameObject.getXPos() + gameObject.getWidth())
+    if(gameObject2.getXPos() <= gameObject1.getXPos() + gameObject1.getWidth())
     b = true;
-    if(ypos + height > gameObject.getYPos())
+    if(gameObject2.getYPos() + gameObject2.getHeight() >= gameObject1.getYPos())
     c = true;
-    if(ypos < gameObject.getYPos() + gameObject.getHeight())
+    if(gameObject2.getYPos() <= gameObject1.getYPos() + gameObject1.getHeight())
     d = true;
     if(a && b && c && d){
         return true;
@@ -102,7 +103,13 @@ bool GameObject::isColliding(GameObject gameObject){
  * @return int xpos
  */
 int GameObject::getXPos(){
+    if(xpos < 0){
+        return (320 - abs(xpos % 320));
+    }else if(xpos > 0){
+        return (xpos % 320);
+    }else{
     return xpos;
+    }
 }
 
 /**
