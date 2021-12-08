@@ -1,6 +1,13 @@
 #include "GameObject.h"
 #include "Player.h"
 
+/* Author: William Comer */
+
+/**
+ * @author William Comer
+ * @brief Handles everything to do with Enemies, child class of GameObject
+ * 
+ */
 class Enemy : public GameObject
 {
 public:

@@ -1,5 +1,7 @@
 #include "usertools.h"
 
+/* Author: Adam Gluck */
+
 /**
  * @brief Construct a new Button:: Button object
  * 

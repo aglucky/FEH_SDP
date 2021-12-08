@@ -1,5 +1,12 @@
 #pragma once
 #include "GameObject.h"
+/* 
+    Author: Adam Gluck
+    Edited By: William Comer
+            --Made it inherit from GameObject in order to be drawn as a GameObject in the Game Class
+    Note: the Player class is a child class of the GameObject class
+ */
+
 /**
  * @brief Handles everything related to the player.
  * 

@@ -5,7 +5,10 @@
 #include <string>
 
 
-/* Author: William Comer */
+/* Author: William Comer
+
+    NOTE: This is the parent class of the Enemy class and the Player class.
+ */
 
 class GameObject{
     public:
@@ -20,9 +23,6 @@ class GameObject{
         int getRadius();
         
         void draw();
-        void changePos(int, int);
-        bool isInside(int, int);
-        bool inContact(GameObject*);
         static bool isColliding(GameObject, GameObject);
     protected:
         int xpos, ypos, height, width;

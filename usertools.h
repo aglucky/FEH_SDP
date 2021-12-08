@@ -5,6 +5,7 @@
 using namespace std;
 
 /**
+ * @author Adam Gluck
  * @brief Handles everything related to buttons
  * 
  */

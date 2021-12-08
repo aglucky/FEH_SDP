@@ -1,6 +1,8 @@
 #include <string>
 #include "usertools.h"
 
+/* Author: Adam Gluck */
+
 /**
  * @brief Handles everything related to the main menu
  * 

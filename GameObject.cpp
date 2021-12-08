@@ -4,26 +4,47 @@
 /* Author: William Comer */
 
 /**
- * @brief Construct a new Game Object:: Game Object object
+ * @brief Construct a new Game Object, default constructor
  * 
  */
 GameObject::GameObject(){
-        //
+
 }
 
+/**
+ * @brief Construct a new Game Object with an image and position
+ * 
+ * @param imageFilePath File path to formated .pic image file
+ * @param x initial x position
+ * @param y initial y position
+ */
 GameObject::GameObject(const char *imageFilePath, int x, int y){
         xpos = x;
         ypos = y;
+        //Opens an FEHIMAGE Object to allow for drawing and sets the width and height of the GameObject
         setImage(imageFilePath);
 }
+
+/**
+ * @brief Destroy the Game Object:: Game Object object
+ * 
+ * Some issues with this if it is attempted to close the image...
+ */
 GameObject::~GameObject(){
     //image.Close();
 }
 
+
+/**
+ * @brief Sets the image to be drawn in the GameObject's draw method
+ * 
+ * @param imageFilePath File path to formatted. pic image file
+ */
 void GameObject::setImage(const char *imageFilePath){
     try
     {
         image.Open(imageFilePath);
+        //Sets the width and height of the GameObject
         width = image.getCol();
         height = image.getRows();
     }
@@ -33,36 +54,16 @@ void GameObject::setImage(const char *imageFilePath){
     }
 }
 
+/**
+ * @brief Draws the GameObject at its current position
+ * 
+ */
 void GameObject::draw(){
     image.Draw(xpos, ypos);
 }
 
-void GameObject::changePos(int dx, int dy){
-    xpos += dx;
-    ypos += dy;
-}
-        
-bool GameObject::isInside(int x, int y){
-    if((x >= xpos && x <= xpos + width -1) && (y >= ypos && y <= ypos + height -1)){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-bool GameObject::inContact(GameObject* gameObject){
-       for(int x = xpos; x <= width; x++){
-        for(int y = ypos; y <= height; y++){
-            if(gameObject->isInside(x, y)){
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 /**
- * @brief Checks if two gameObjects are colliding
+ * @brief Static Method that checks if two gameObjects are colliding
  * 
  * Algorithm learned from:
  * @cite label://www.jeffreythompson.org/collision-detection/rect-rect.php
@@ -86,16 +87,7 @@ bool GameObject::isColliding(GameObject gameObject1, GameObject gameObject2){
     }else{
         return false;
     }
-    /*
-    if(xpos <= gameObject->getXPos() + gameObject->getWidth() &&
-    xpos + width > gameObject->getXPos() &&
-    ypos < gameObject->getYPos() + gameObject->getHeight() &&
-    ypos + height > gameObject->getYPos()){
-        return true;
-    }else{
-        return false;
-    }
-    */
+
 }
 /**
  * @brief gets the GameObject's X Position

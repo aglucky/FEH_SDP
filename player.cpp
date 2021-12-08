@@ -7,8 +7,14 @@
 #define EASY 1
 #define HARD 2
 
+/*
+    Author: Adam Gluck
+    Edited: William Comer
+*/
+
 /**
- * @brief Construct a new Player:: Player object
+ * @author Adam Gluck
+ * @brief Construct a new Player:: Player object Default constructor
  * 
  */
 Player::Player()
@@ -20,8 +26,18 @@ Player::Player()
     time = 0;
 }
 
+/**
+ * @author William Comer
+ * @brief Construct a new Player:: Player object that is a GameObject
+ * 
+ * @param difficulty 
+ * @param imageFilePath1 
+ * @param imageFilePath2 
+ * @param ix 
+ * @param iy 
+ */
 Player::Player(int difficulty,const char *imageFilePath1, const char *imageFilePath2, int ix, int iy) : GameObject(imageFilePath1, ix, iy){
-    Player();
+    Player();//Calls default constructor
     imgFP1 = imageFilePath1;
     imgFP2 = imageFilePath2;
     switch (difficulty){
@@ -45,6 +61,7 @@ Player::~Player()
 }
 
 /**
+ * @author Adam Gluck
  * @brief Moves the player right on the LCD
  * 
  */
@@ -59,6 +76,7 @@ void Player::moveForward()
 }
 
 /**
+ * @author Adam Gluck
  * @brief Moves the player left on the LCD
  * 
  */
@@ -73,6 +91,7 @@ void Player::moveBackward()
 }
 
 /**
+ * @author Adam Gluck
  * @brief Makes the player jump
  * 
  */
@@ -86,11 +105,14 @@ void Player::jump()
 }
 
 /**
+ * @authors Adam Gluck, William Comer
  * @brief Updates the players position and speed
  * 
  */
 void Player::update()
 {
+    //Author: William Comer
+    //Fliping the images to be drawn creating animation effect
         if(imageDisp <= 15){
             setImage(imgFP1);
         }else{
@@ -98,6 +120,9 @@ void Player::update()
         }
     ++imageDisp;
     imageDisp = imageDisp % 30;
+    //End Comer
+
+    //Author: Adam Gluck
     // X movement
     xpos += xSpeed;
     if (xSpeed > 0)
@@ -136,10 +161,22 @@ void Player::update()
     }
 }
 
+/**
+ * @author William Comer
+ * @brief decriments the player's lives by 1
+ * 
+ */
 void Player::loseLife(){
     --playerLives;
 }
 
+/**
+ * @author William Comer
+ * @brief Returns if the player is out of lives
+ * 
+ * @return true if lives <= 0
+ * @return false if lives > 0
+ */
 bool Player::isDead(){
     if(playerLives <= 0){
         return true;
@@ -148,6 +185,12 @@ bool Player::isDead(){
     }
 }
 
+/**
+ * @author William Comer
+ * @brief Returns how many lives the Player has
+ * 
+ * @return int Number of Lives
+ */
 int Player::getLives(){
     return playerLives;
 }

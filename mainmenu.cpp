@@ -2,6 +2,12 @@
 
 #define LCD_WIDTH 320
 #define LCD_HEIGHT 240
+
+/* Authors: Adam Gluck, Willaim Comer
+        Gluck-Created structure and entirety of menu() method.
+        Comer-Implemented stats tracking and filled in the different screens
+*/
+
 /**
  * @brief Construct a new Main Menu:: Main Menu object
  * 
@@ -39,16 +45,16 @@ void MainMenu::drawStats(int *stats)
     //Values Returned by last time game was played
     LCD.SetFontColor(BLUE);
     if(*(stats +2) == 1){
-    LCD.WriteAt("Dif Lvl: Easy", 10, 160);
+    LCD.WriteAt("Dif Lvl: Easy", 10, 120);
     }else if(*(stats + 2) == 2){
-    LCD.WriteAt("Dif Lvl: Hard", 10, 160);
+    LCD.WriteAt("Dif Lvl: Hard", 10, 120);
     }else{
-    LCD.WriteAt("Dif Lvl: ---", 10, 160);
+    LCD.WriteAt("Dif Lvl: ---", 10, 120);
     }
-    LCD.WriteAt("STOMPS:", 10, 180);
-    LCD.WriteAt(*stats, 95, 180);
-    LCD.WriteAt("Time:", 10, 200);
-    LCD.WriteAt(*(stats + 1), 70, 200);
+    LCD.WriteAt("STOMPS:", 10, 140);
+    LCD.WriteAt(*stats, 95, 140);
+    LCD.WriteAt("Time(s):", 10, 160);
+    LCD.WriteAt(*(stats + 1), 110, 160);
     backButton.draw();
 }
 
