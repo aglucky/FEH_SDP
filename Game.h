@@ -14,15 +14,16 @@ public:
 private:
     //bool collisionResult(Player, GameObject*);
     //void collisionCheck(Player, GameObject *[], int);
-    bool collisionCheck(Player, Enemy*);
+    bool collisionCheck(Player*, Enemy*);
     void spawnEnemy(int);
+    void spawn();
 
     Player player;
     Button jump = Button(0, 20, 320, 20, "Jump");
     Background map = Background();
-    Button backButton = Button("Back");
+    Button quitButton = Button("Quit");
 
-    int difficulty, lastActiveEnemyIndex;
+    int difficulty, lastActiveEnemy, numberOfStomps;
     
     Enemy a0 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 20, 180);
     Enemy a1 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 20, 180);

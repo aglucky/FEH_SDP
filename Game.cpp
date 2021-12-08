@@ -13,7 +13,7 @@ Game::Game(int dif)
 {
     player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
     difficulty = dif;
-    lastActiveEnemyIndex = -1;
+    lastActiveEnemy = -1;
 }
 
 /**
@@ -26,8 +26,8 @@ void Game::draw()
     map.draw();
     player.draw();
     jump.draw();
-    backButton.draw();
-    for (int i = 0; i < 10; i++)//???HM
+    quitButton.draw();
+    for (int i = 0; i < 10; i++) //???HM
     {
         if (enemies[i]->getState())
         {
@@ -36,12 +36,15 @@ void Game::draw()
     }
 }
 
-void Game::update(){
+void Game::update()
+{
     player.update();
-    for(int i = 0; i < 10; i++){
-        collisionCheck(player, enemies[i]);
+    for (int i = 0; i < 10; i++)
+    {
+        collisionCheck(&player, enemies[i]);
         enemies[i]->update(&player);
     }
+    cout << player.getLives();
 }
 
 void Game::play()
@@ -50,37 +53,55 @@ void Game::play()
     float x, y;
     while (true)
     {
-        draw();
-
-        while (!LCD.Touch(&x, &y))
+        if (!player.isDead())
         {
-            update();
-            Sleep(10);
-            LCD.Clear();
             draw();
-            if (lastActiveEnemyIndex == -1)
+            update();
+
+            while (!LCD.Touch(&x, &y))
             {
-                spawnEnemy(lastActiveEnemyIndex);
-                std::cout << "Spawned an enemy";
+                update();
+                Sleep(10);
+                LCD.Clear();
+                draw();
+                if (lastActiveEnemy == -1)
+                {
+                    spawnEnemy(0);
+                    std::cout << "Spawned an enemy";
+                }
+                if (player.isDead())
+                {
+                    break;
+                }
             }
-        }
 
-        if (jump.isPressed(x, y))
-        {
-            player.jump();
-        }
+            if (jump.isPressed(x, y))
+            {
+                player.jump();
+            }
 
-        else if (x < 120)
-        {
-            player.moveBackward();
-        }
+            else if (x < 120)
+            {
+                player.moveBackward();
+            }
 
-        else if (x > 120)
-        {
-            player.moveForward();
+            else if (x > 120)
+            {
+                player.moveForward();
+            }
+            LCD.Clear();
         }
-        LCD.Clear();
-        if (backButton.isPressed(x, y))
+        else
+        {
+            draw();
+            LCD.WriteAt("YOU LOSE", 80, 100);
+            LCD.Update();
+            while (!LCD.Touch(&x, &y))
+            {
+            }
+            //Do something now that the player is dead.
+        }
+        if (quitButton.isPressed(x, y))
         {
             player.~Player();
             //Need to prevent additional memory leaks??
@@ -89,12 +110,25 @@ void Game::play()
     }
 }
 
-void Game::spawnEnemy(int lastActiveEnemy)
+void Game::spawn(){
+    switch(difficulty){
+        case 1:
+                spawnEnemy(0);
+            break;
+        case 2:
+
+            break;
+        default:
+            cout << "Not a Valid Difficulty.\n";
+    }
+}
+
+void Game::spawnEnemy(int xloc)
 {
     if (lastActiveEnemy <= 48)
     {
         enemies[lastActiveEnemy + 1]->setState(true);
-        ++lastActiveEnemyIndex;
+        ++lastActiveEnemy;
     }
     else
     {
@@ -112,22 +146,22 @@ void Game::spawnEnemy(int lastActiveEnemy)
  * @param player 
  * @param enemy 
  */
-bool Game::collisionCheck(Player player, Enemy *enemy)
+bool Game::collisionCheck(Player *player, Enemy *enemy)
 {
     //NOTE: Making this too sensitive causes issues because the game does not update/draw itself fast enough.
-    int collisionHeight = player.getYPos() + player.getHeight() / 2;
+    int collisionHeight = player->getYPos() + player->getHeight() / 2 + player->getHeight() / 4;
     if (enemy->getState())
     {
-        if (GameObject::isColliding(player, *enemy) && collisionHeight < enemy->getYPos())
+        if (GameObject::isColliding(*player, *enemy) && collisionHeight < enemy->getYPos())
         {
             enemy->setState(false);
             std::cout << enemy->getState();
             return true;
         }
-        else if (GameObject::isColliding(player, *enemy) && collisionHeight > enemy->getYPos())
+        else if (GameObject::isColliding(*player, *enemy) && collisionHeight > enemy->getYPos())
         {
-            player.loseLife();
-            //std::cout << player.getLives();
+            player->loseLife();
+            std::cout << player->getLives();
             return true;
         }
     }

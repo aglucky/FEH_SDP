@@ -28,10 +28,19 @@ bool Enemy::getState(){
 }
 
 void Enemy::update(Player *player){
+    bool flag = false;
     if(getXPos() > (player->getXPos())){
         moveBackward();
+        flag = true;
     }else if(getXPos() < (player->getXPos())){
         moveForward();
+        flag = false;
+    }else{
+        if(flag){
+            moveForward();
+        }else{
+            moveBackward();
+        }
     }
 
         if(imageDisp <= 15){
