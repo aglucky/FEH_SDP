@@ -51,6 +51,8 @@ void Platform::changePos(int dx, int dy){
     draw();
 }
 
+
+/*
 /**
  * @brief checks if a given set of coordinates are within the boundaries of this platform
  * 
@@ -58,7 +60,7 @@ void Platform::changePos(int dx, int dy){
  * @param y y coordinate to check
  * @return true if the coordinates are within this platform
  * @return false if the coordinates are not within this platform
- */
+ *
 bool Platform::isInside(int x, int y){
     if((x >= xpos && x <= xpos + width -1) && (y >= ypos && y <= ypos + height -1)){
         return true;
@@ -74,7 +76,7 @@ bool Platform::isInside(int x, int y){
  * this platform.
  * @return true if the gameObject is in contact with this platform
  * @return false if the gameObject is not in contact with this platform
- */
+ *
 bool Platform::inContact(GameObject *gameObject){
     for(int x = xpos; x <= width; x++){
         for(int y = ypos; y <= height; y++){
@@ -85,3 +87,5 @@ bool Platform::inContact(GameObject *gameObject){
     }
     return false;
 }
+
+*/

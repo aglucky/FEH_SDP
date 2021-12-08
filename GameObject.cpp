@@ -62,6 +62,41 @@ bool GameObject::inContact(GameObject* gameObject){
 }
 
 /**
+ * @brief Checks if two gameObjects are colliding
+ * 
+ * Algorithm taken from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+ * 
+ * @param gameObject 
+ * @return true if colliding
+ * @return false if not colliding
+ */
+bool GameObject::isColliding(GameObject gameObject){
+    bool a = false, b = false, c = false, d = false;
+    if(xpos + width > gameObject.getXPos())
+    a = true;
+    if(xpos > gameObject.getXPos() + gameObject.getWidth())
+    b = true;
+    if(ypos + height > gameObject.getYPos())
+    c = true;
+    if(ypos < gameObject.getYPos() + gameObject.getHeight())
+    d = true;
+    if(a && b && c && d){
+        return true;
+    }else{
+        return false;
+    }
+    /*
+    if(xpos <= gameObject->getXPos() + gameObject->getWidth() &&
+    xpos + width > gameObject->getXPos() &&
+    ypos < gameObject->getYPos() + gameObject->getHeight() &&
+    ypos + height > gameObject->getYPos()){
+        return true;
+    }else{
+        return false;
+    }
+    */
+}
+/**
  * @brief gets the GameObject's X Position
  * 
  * @return int xpos

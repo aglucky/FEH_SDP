@@ -19,10 +19,18 @@ class GameObject{
         int getWidth();
         int getRadius();
         
+<<<<<<< Updated upstream
         void draw();
         void changePos(int, int);
         bool isInside(int, int);
         bool inContact(GameObject*);
+=======
+        bool isColliding(GameObject);
+        virtual void draw(){};
+        virtual void changePos(int, int){};
+        virtual bool isInside(int, int){return NULL;};
+        virtual bool inContact(GameObject*){return NULL;};
+>>>>>>> Stashed changes
     protected:
         int xpos, ypos, height, width;
         void setImage(const char *);
