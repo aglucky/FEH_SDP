@@ -39,7 +39,6 @@ int main()
     {
         // Get the difficulty
         difficulty = start.menu(stats);
-        cout << difficulty;
         Game game = Game(difficulty, stats);
         game.play();
     }

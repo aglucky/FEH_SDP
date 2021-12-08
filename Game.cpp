@@ -12,7 +12,6 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 /** Empty Constructor*/
 Game::Game(int dif, int *s)
 {
-    cout << "well the game was made";
     gameStartTime = TimeNow();
     srand(TimeNowSec());
     player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
@@ -68,7 +67,6 @@ void Game::update()
             //spawnEnemy(0);
             enemies[0]->setXPosition(0);
             enemies[0]->setState(true);
-            std::cout << "Spawned an enemy";
             flag %= 30;
             flag++;
         }
@@ -81,7 +79,6 @@ void Game::update()
             //spawnEnemy(0);
             enemies[0]->setXPosition(0);
             enemies[0]->setState(true);
-            std::cout << "Spawned an enemy";
             flagh1 %= 30;
             flagh1++;
         }
@@ -91,7 +88,6 @@ void Game::update()
             //spawnEnemy(0);
             enemies[1]->setXPosition(305);
             enemies[1]->setState(true);
-            std::cout << "Spawned an enemy";
             flagh2 %= 20;
             flagh2++;
         }
@@ -116,6 +112,8 @@ void Game::play()
                 draw();
                 if (player.isDead())
                 {
+                    x = 0;
+                    y = 0;
                     break;
                 }
             }
