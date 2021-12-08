@@ -1,6 +1,6 @@
 #pragma once
-#include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\simulator_libraries\FEHLCD.h"
-#include "C:\Users\happy\Documents\FEH\FEH_SDP\FEH_SDP\simulator_libraries\FEHUtility.h"
+#include "FEHLCD.h"
+#include "FEHUtility.h"
 #include "FEHImages.h"
 #include <string>
 
