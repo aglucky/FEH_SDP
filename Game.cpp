@@ -2,6 +2,7 @@
 
 #define ACTIVE true
 #define INACTIVE false
+#define MAX_ENEMIES 3
 /*
 This game class holds the methods that allow for drawing the whole game at once.
 
@@ -31,7 +32,10 @@ void Game::draw()
     player.draw();
     jump.draw();
     quitButton.draw();
-    for (int i = 0; i < 10; i++) //???HM
+
+    LCD.WriteAt("Lives: ", 0, 20);
+    LCD.Update();
+    for (int i = 0; i < MAX_ENEMIES; i++) //???HM
     {
         if (enemies[i]->getState())
         {
@@ -42,19 +46,31 @@ void Game::draw()
 
 void Game::update()
 {
+    ++flag;
     cout << "1";
     player.update();
     cout << "2";
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < MAX_ENEMIES; i++)
     {
+        if (flag % 30 == 0 && !(enemies[i]->getState()))
+        {
+            flag %= 30;
+            enemies[i]->setXPosition(0);
+            enemies[i]->setState(true);
+        }
         cout << "3";
         collisionCheck(&player, enemies[i]);
         cout << "4";
         enemies[i]->update(&player);
     }
     //cout << player.getLives();
-   // ++flag;
+
     //Spawn New Enemies
+    /*if(flag % 20 == 0){
+        flag %= 20;
+        spawnEnemy(0);
+    }
+    */
     /*
     if (flag % 10 == 0)
     {
@@ -100,16 +116,16 @@ void Game::play()
             while (!LCD.Touch(&x, &y))
             {
                 update();
-                Sleep(10);
+                //Sleep(10);
                 LCD.Clear();
                 draw();
 
-                if(flag == 0){
+                /*if(flag == 0){
                     //spawnEnemy(0);
                     enemies[0]->setState(true);
                     std::cout << "Spawned an enemy";
                     flag++;
-                }
+                }*/
 
                 if (player.isDead())
                 {
@@ -178,13 +194,13 @@ void Game::spawn()
 
 void Game::spawnEnemy(int xloc)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < MAX_ENEMIES; i++)
     {
         if (!(enemies[i]->getState()))
         {
             enemies[i]->setXPosition(xloc);
             enemies[i]->setState(true);
-            break;
+            return;
         }
     }
 }

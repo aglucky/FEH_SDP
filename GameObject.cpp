@@ -8,7 +8,7 @@
  * 
  */
 GameObject::GameObject(){
-        //NEED TO IMPLEMENT A DEFAULT IMAGE
+        //
 }
 
 GameObject::GameObject(const char *imageFilePath, int x, int y){
