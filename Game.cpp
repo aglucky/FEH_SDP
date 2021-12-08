@@ -11,13 +11,8 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 /** Empty Constructor*/
 Game::Game(int dif)
 {
-
-    player = Player(dif, "bryce1FEH1.pic", "bryce2FEH2.pic", 160, 185);
+    player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
     difficulty = dif;
-    for (int i = 0; i < 50; i++)
-    {
-        enemies[i] = Enemy("basicEnemyFEH.pic", 20, 185);
-    }
     lastActiveEnemyIndex = -1;
 }
 
@@ -32,14 +27,19 @@ void Game::draw()
     player.draw();
     jump.draw();
     backButton.draw();
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 10; i++)//???HM
     {
-        //std::cout << enemies[i].getState();
-        if (enemies[i].getState())
+        if (enemies[i]->getState())
         {
-            enemies[i].draw();
-            //collisionCheck(player, enemies[i]);
+            enemies[i]->draw();
         }
+    }
+}
+
+void Game::update(){
+    player.update();
+    for(int i = 0; i < 10; i++){
+        collisionCheck(player, enemies[i]);
     }
 }
 
@@ -50,22 +50,18 @@ void Game::play()
     while (true)
     {
         draw();
-        for (int i = 0; i < 1; i++)
-        {
-
-            std::cout << enemies[i].getState();
-            collisionCheck(player, enemies[i]);
-        }
-        if(lastActiveEnemyIndex == -1){
-            spawnEnemy(lastActiveEnemyIndex);
-        }
 
         while (!LCD.Touch(&x, &y))
         {
-            player.update();
+            update();
             Sleep(10);
             LCD.Clear();
             draw();
+            if (lastActiveEnemyIndex == -1)
+            {
+                spawnEnemy(lastActiveEnemyIndex);
+                std::cout << "Spawned an enemy";
+            }
         }
 
         if (jump.isPressed(x, y))
@@ -92,14 +88,17 @@ void Game::play()
     }
 }
 
-void Game::spawnEnemy(int lastActiveEnemy){
-    if(lastActiveEnemy <= 48){
-        enemies[lastActiveEnemy + 1].setState(true);
+void Game::spawnEnemy(int lastActiveEnemy)
+{
+    if (lastActiveEnemy <= 48)
+    {
+        enemies[lastActiveEnemy + 1]->setState(true);
         ++lastActiveEnemyIndex;
-    }else{
-        std::cout << "Max Number of Enemies Spawned";    
     }
-    
+    else
+    {
+        std::cout << "Max Number of Enemies Spawned";
+    }
 }
 
 /**
@@ -112,19 +111,19 @@ void Game::spawnEnemy(int lastActiveEnemy){
  * @param player 
  * @param enemy 
  */
-bool Game::collisionCheck(Player player, Enemy enemy)
+bool Game::collisionCheck(Player player, Enemy *enemy)
 {
     //NOTE: Making this too sensitive causes issues because the game does not update/draw itself fast enough.
     int collisionHeight = player.getYPos() + player.getHeight() / 2;
-    if (enemy.getState())
+    if (enemy->getState())
     {
-        if (GameObject::isColliding(player, enemy) && collisionHeight < enemy.getYPos())
+        if (GameObject::isColliding(player, *enemy) && collisionHeight < enemy->getYPos())
         {
-            enemy.setState(false);
-            std::cout << enemy.getState();
+            enemy->setState(false);
+            std::cout << enemy->getState();
             return true;
         }
-        else if (GameObject::isColliding(player, enemy) && collisionHeight > enemy.getYPos())
+        else if (GameObject::isColliding(player, *enemy) && collisionHeight > enemy->getYPos())
         {
             player.loseLife();
             //std::cout << player.getLives();
