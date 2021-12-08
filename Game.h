@@ -15,12 +15,12 @@ private:
     //bool collisionResult(Player, GameObject*);
     //void collisionCheck(Player, GameObject *[], int);
     bool collisionCheck(Player, Enemy);
-    void addEnemy();
+    void spawnEnemy(int);
 
     Player player;
     Button jump = Button(0, 20, 320, 20, "Jump");
     Background map = Background();
     Button backButton = Button("Back");
     Enemy enemies[50];
-    int difficulty;
+    int difficulty, lastActiveEnemyIndex;
 };

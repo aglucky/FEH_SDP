@@ -14,7 +14,8 @@ Enemy::Enemy(){
 }
 
 Enemy::Enemy(const char *imageFilePath, int x, int y) : GameObject(imageFilePath, x, y){
-    state = ACTIVE;
+    state = INACTIVE;
+    std::cout << "This shit better be called 50 times.";
 }
 
 void Enemy::setState(bool s){

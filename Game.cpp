@@ -18,6 +18,7 @@ Game::Game(int dif)
     {
         enemies[i] = Enemy("basicEnemyFEH.pic", 20, 185);
     }
+    lastActiveEnemyIndex = -1;
 }
 
 /**
@@ -33,11 +34,12 @@ void Game::draw()
     backButton.draw();
     for (int i = 0; i < 1; i++)
     {
-        std::cout << enemies[i].getState();
-        if(enemies[i].getState()){
-        enemies[i].draw();
-        collisionCheck(player, enemies[i]);
-    }
+        //std::cout << enemies[i].getState();
+        if (enemies[i].getState())
+        {
+            enemies[i].draw();
+            //collisionCheck(player, enemies[i]);
+        }
     }
 }
 
@@ -48,6 +50,15 @@ void Game::play()
     while (true)
     {
         draw();
+        for (int i = 0; i < 1; i++)
+        {
+
+            std::cout << enemies[i].getState();
+            collisionCheck(player, enemies[i]);
+        }
+        if(lastActiveEnemyIndex == -1){
+            spawnEnemy(lastActiveEnemyIndex);
+        }
 
         while (!LCD.Touch(&x, &y))
         {
@@ -80,6 +91,17 @@ void Game::play()
         }
     }
 }
+
+void Game::spawnEnemy(int lastActiveEnemy){
+    if(lastActiveEnemy <= 48){
+        enemies[lastActiveEnemy + 1].setState(true);
+        ++lastActiveEnemyIndex;
+    }else{
+        std::cout << "Max Number of Enemies Spawned";    
+    }
+    
+}
+
 /**
  * @brief Checks for a collision between a player and an enemy and acts on result
  * 
@@ -94,19 +116,20 @@ bool Game::collisionCheck(Player player, Enemy enemy)
 {
     //NOTE: Making this too sensitive causes issues because the game does not update/draw itself fast enough.
     int collisionHeight = player.getYPos() + player.getHeight() / 2;
-    if(enemy.getState()){
-    if (GameObject::isColliding(player, enemy) && collisionHeight < enemy.getYPos())
+    if (enemy.getState())
     {
-        enemy.setState(INACTIVE);
-        std::cout << enemy.getState();
-        return true;
-    }
-    else if (GameObject::isColliding(player, enemy) && collisionHeight > enemy.getYPos())
-    {
-        player.loseLife();
-        //std::cout << player.getLives();
-        return true;
-    }
+        if (GameObject::isColliding(player, enemy) && collisionHeight < enemy.getYPos())
+        {
+            enemy.setState(false);
+            std::cout << enemy.getState();
+            return true;
+        }
+        else if (GameObject::isColliding(player, enemy) && collisionHeight > enemy.getYPos())
+        {
+            player.loseLife();
+            //std::cout << player.getLives();
+            return true;
+        }
     }
     return false;
 }
