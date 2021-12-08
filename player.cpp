@@ -20,10 +20,10 @@ Player::Player()
     time = 0;
 }
 
-Player::Player(int difficulty,const char *imageFilePath1, const char *imageFilePath2, int ix, int iy) : GameObject(imageFilePath1, ix, iy){
+Player::Player(int difficulty,FEHIMAGE *img1, FEHIMAGE *img2, int ix, int iy) : GameObject(img1, ix, iy){
     Player();
-    imgFP1 = imageFilePath1;
-    imgFP2 = imageFilePath2;
+    imgP1 = img1;
+    imgP2 = img2;
     switch (difficulty){
         case EASY:
             playerLives = 5;
@@ -92,9 +92,9 @@ void Player::jump()
 void Player::update()
 {
         if(imageDisp <= 15){
-            setImage(imgFP1);
+            setImage(imgP1);
         }else{
-            setImage(imgFP2);
+            setImage(imgP2);
         }
     ++imageDisp;
     imageDisp = imageDisp % 30;

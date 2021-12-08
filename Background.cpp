@@ -3,6 +3,10 @@
 
 /* Author: William Comer */
 
+Background::Background(){
+    
+}
+
 /**
  * @brief Construct a new Background:: Background object
  *
@@ -11,9 +15,9 @@
  * NEED TO IMPLEMENT
  *
  */
-Background::Background()
+Background::Background(FEHIMAGE *backgroundImage)
 {
-    ground = GameObject("groundFEH.pic", 0, 220);
+    ground = GameObject(backgroundImage, 0, 220);
 }
 
 void Background::draw()

@@ -7,7 +7,25 @@ using namespace std;
 int main()
 {
 
+    FEHIMAGE p1;
+    FEHIMAGE p2;
+    FEHIMAGE e1;
+    FEHIMAGE e2;
+    FEHIMAGE b;
+    try
+    {
+        p1.Open("bryce1FEH.pic");
+        p2.Open("bryce2FEH.pic");
+        e1.Open("Adam1FEH.pic");
+        e2.Open("Adam2FEH.pic");
+        b.Open("groundFEH.pic");
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
     
+    p1.Draw(0,180);
     // Create nessesary objects
     MainMenu start = MainMenu();
     Player test = Player();
@@ -40,9 +58,14 @@ int main()
     {
         // Get the difficulty
         difficulty = start.menu();
-        Game game = Game(difficulty);
+        Game game = Game(difficulty, &p1, &p2, &e1, &e2, &b);
         game.play();
     }
+    p1.Close();
+    p2.Close();
+    e1.Close();
+    e2.Close();
+    b.Close();
     return 0;
     
 }

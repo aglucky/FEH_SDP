@@ -17,12 +17,12 @@ private:
     double xAcceleration = 5.2, yAcceleration = 2.2;
     double x, y;
     double time;
-    const char *imgFP1, *imgFP2;
+    FEHIMAGE *imgP1, *imgP2;
 
 public:
     // Constructor and instance methods
     Player();
-    Player(int,const char *,const char *, int, int);
+    Player(int, FEHIMAGE *, FEHIMAGE *, int, int);
     // Destructor
     ~Player();
     void moveForward();

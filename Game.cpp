@@ -9,11 +9,12 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 */
 
 /** Empty Constructor*/
-Game::Game(int dif)
+Game::Game(int dif,FEHIMAGE * p1, FEHIMAGE * p2, FEHIMAGE * e1, FEHIMAGE * e2, FEHIMAGE * b)
 {
+    map = Background(b);
     gameStartTime = TimeNow();
     srand(TimeNowSec());
-    player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
+    player = Player(dif, p1, p2, 160, 160);
     difficulty = dif;
     timeOfLastSpawn = 0;
     randTimeInterval = 8;

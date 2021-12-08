@@ -7,6 +7,7 @@
 class Background{
     public:
         Background();
+        Background(FEHIMAGE *);
         void draw();
         GameObject ground;
 };

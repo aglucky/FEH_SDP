@@ -11,30 +11,23 @@ GameObject::GameObject(){
         //NEED TO IMPLEMENT A DEFAULT IMAGE
 }
 
-GameObject::GameObject(const char *imageFilePath, int x, int y){
+GameObject::GameObject(FEHIMAGE * i, int x, int y){
         xpos = x;
         ypos = y;
-        setImage(imageFilePath);
+        image = i;
 }
 GameObject::~GameObject(){
     //image.Close();
 }
 
-void GameObject::setImage(const char *imageFilePath){
-    try
-    {
-        image.Open(imageFilePath);
-        width = image.getCol();
-        height = image.getRows();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+void GameObject::setImage(FEHIMAGE * i){
+    image = i;
+    width = image->getCol();
+    height = image->getRows();
 }
 
 void GameObject::draw(){
-    image.Draw(xpos, ypos);
+    image->Draw(xpos, ypos);
 }
 
 void GameObject::changePos(int dx, int dy){

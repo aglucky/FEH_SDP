@@ -7,7 +7,7 @@
 class Game
 {
 public:
-    Game(int difficulty);
+    Game(int difficulty, FEHIMAGE *, FEHIMAGE *, FEHIMAGE *, FEHIMAGE *, FEHIMAGE *);
     void draw();
     void update();
     void play();
@@ -21,23 +21,13 @@ private:
 
     Player player;
     Button jump = Button(0, 20, 320, 20, "Jump");
-    Background map = Background();
+    Background map;
     Button quitButton = Button("Quit");
-
     int difficulty,numberOfStomps, flag;
 
     unsigned int gameStartTime, timeOfLastSpawn, randTimeInterval;
     
-    Enemy a0 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a1 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a2 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a3 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a4 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a5 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a6 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a7 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a8 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
-    Enemy a9 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
+    Enemy a0, a1, a2, a3, a4, a5, a6, a7, a8, a9;
     /*Enemy a10 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 20, 185);
     Enemy a11 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 20, 185);
     Enemy a12 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 20, 185);

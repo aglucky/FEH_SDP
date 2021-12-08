@@ -13,10 +13,10 @@ Enemy::Enemy(){
     state = ACTIVE;
 }
 
-Enemy::Enemy(const char *imageFilePath1, const char *imageFilePath2, int x, int y) : GameObject(imageFilePath1, x, y){
+Enemy::Enemy(FEHIMAGE * i1, FEHIMAGE *i2, int x, int y) : GameObject(i1, x, y){
     state = INACTIVE;
-    imgFP1 = imageFilePath1;
-    imgFP2 = imageFilePath2;
+    imgP1 = i1;
+    imgP2 = i2;
 }
 
 void Enemy::setState(bool s){
@@ -44,9 +44,9 @@ void Enemy::update(Player *player){
     }
 
         if(imageDisp <= 15){
-            setImage(imgFP1);
+            setImage(imgP1);
         }else{
-            setImage(imgFP2);
+            setImage(imgP2);
         }
     ++imageDisp;
     imageDisp = imageDisp % 30;
