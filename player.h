@@ -1,3 +1,4 @@
+#pragma once
 #include "GameObject.h"
 /**
  * @brief Handles everything related to the player.
@@ -11,7 +12,7 @@ private:
     int playerLives;
     int imageDisp = 1;
     double normalHeight = 160;
-    double maxSpeed = 5.5, maxJumpSpeed = 25.0;
+    double maxSpeed = 5.5, maxJumpSpeed = 20.0;
     double xSpeed, ySpeed;
     double xAcceleration = 5.2, yAcceleration = 2.2;
     double x, y;

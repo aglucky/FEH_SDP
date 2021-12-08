@@ -40,6 +40,7 @@ void Game::update(){
     player.update();
     for(int i = 0; i < 10; i++){
         collisionCheck(player, enemies[i]);
+        enemies[i]->update(&player);
     }
 }
 

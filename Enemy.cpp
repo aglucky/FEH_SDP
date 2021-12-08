@@ -27,7 +27,12 @@ bool Enemy::getState(){
     return state;
 }
 
-void Enemy::update(){
+void Enemy::update(Player *player){
+    if(getXPos() > (player->getXPos())){
+        moveBackward();
+    }else if(getXPos() < (player->getXPos())){
+        moveForward();
+    }
 
         if(imageDisp <= 15){
             setImage(imgFP1);
@@ -53,5 +58,21 @@ void Enemy::update(){
         {
             xSpeed = 0;
         }
+    }
+}
+
+void Enemy::moveForward(){
+    xSpeed += xAcceleration;
+    if (xSpeed > maxSpeed)
+    {
+        xSpeed = maxSpeed;
+    }
+}
+
+void Enemy::moveBackward(){
+    xSpeed -= xAcceleration;
+    if (xSpeed < -maxSpeed)
+    {
+        xSpeed = -maxSpeed;
     }
 }

@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Player.h"
 
 class Enemy : public GameObject
 {
@@ -8,14 +9,14 @@ public:
     void setState(bool);
     bool getState();
     void move();
+    void update(Player *);
 
 private:
     bool state;
     int imageDisp = 1;
-    double maxSpeed = 5.5, xAcceleration = 5.2, xSpeed; 
+    double maxSpeed = 3, xAcceleration = 5.2, xSpeed; 
     const char *imgFP1, *imgFP2;
 
     void moveForward();
-    void moveBackward();
-    void update();
+    void moveBackward();   
 };
