@@ -9,4 +9,5 @@ class Background{
         Background();
         void draw();
         GameObject ground;
+        GameObject background;
 };

@@ -38,10 +38,17 @@ void MainMenu::drawStats(int *stats)
     LCD.WriteAt("From Last Game", 80, 90);
     //Values Returned by last time game was played
     LCD.SetFontColor(BLUE);
-    LCD.WriteAt("STOMPS:", 10, 160);
-    LCD.WriteAt(*stats, 95, 160);
-    LCD.WriteAt("Time:", 10, 180);
-    LCD.WriteAt(*(stats + 1), 70, 180);
+    if(*(stats +2) == 1){
+    LCD.WriteAt("Dif Lvl: Easy", 10, 160);
+    }else if(*(stats + 2) == 2){
+    LCD.WriteAt("Dif Lvl: Hard", 10, 160);
+    }else{
+    LCD.WriteAt("Dif Lvl: ---", 10, 160);
+    }
+    LCD.WriteAt("STOMPS:", 10, 180);
+    LCD.WriteAt(*stats, 95, 180);
+    LCD.WriteAt("Time:", 10, 200);
+    LCD.WriteAt(*(stats + 1), 70, 200);
     backButton.draw();
 }
 

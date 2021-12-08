@@ -60,82 +60,42 @@ void Game::update()
     *(stats) = numberOfStomps;
     *(stats + 1) = TimeNowSec() - gameStartTime;
 
-    if(difficulty == 1){
-    flag++;
-    if (flag % 30 == 0 && !(enemies[0]->getState()))
+    if (difficulty == 1)
     {
-        //spawnEnemy(0);
-        enemies[0]->setXPosition(0);
-        enemies[0]->setState(true);
-        std::cout << "Spawned an enemy";
-        flag %= 30;
         flag++;
-    }
-    }
-    if(difficulty == 2){
-    flagh1++;
-    if (flagh1 % 25 == 0 && !(enemies[0]->getState()))
-    {
-        //spawnEnemy(0);
-        enemies[0]->setXPosition(0);
-        enemies[0]->setState(true);
-        std::cout << "Spawned an enemy";
-        flagh1 %= 30;
-        flagh1++;
-    }
-    flagh2++;
-    if (flagh2 % 20 == 0 && !(enemies[1]->getState()))
-    {
-        //spawnEnemy(0);
-        enemies[1]->setXPosition(305);
-        enemies[1]->setState(true);
-        std::cout << "Spawned an enemy";
-        flagh2 %= 20;
-        flagh2++;
-    }
-    }
-    //cout << player.getLives();
-    /*
-    for(int i = 0; i <MAX_ENEMIES; i++){
-    if(!(enemies[i]->getState())){
-            //enemies[i]->setXPosition(0);
-            enemies[i]->setState(true);
-        }
-    }
-    */
-    //Spawn New Enemies
-    /*if(flag % 20 == 0){
-        flag %= 20;
-        spawnEnemy(0);
-    }
-    */
-    /*
-    if (flag % 10 == 0)
-    {
-        cout << "5";
-        flag %= 10;
-        switch (difficulty)
+        if (flag % 30 == 0 && !(enemies[0]->getState()))
         {
-        case 1:
-            if (TimeNowSec() - timeOfLastSpawn > randTimeInterval)
-            {
-                randTimeInterval = 1; rand() % 20 + 8
-                ;
-                timeOfLastSpawn = TimeNowSec();
-                spawn();
-            }
-            break;
-        case 2:
-            if (TimeNowSec() - timeOfLastSpawn > randTimeInterval)
-            {
-                randTimeInterval = rand() % 18 + 5;
-                timeOfLastSpawn = TimeNowSec() - gameStartTime;
-                spawn();
-            }
-            break;
+            //spawnEnemy(0);
+            enemies[0]->setXPosition(0);
+            enemies[0]->setState(true);
+            std::cout << "Spawned an enemy";
+            flag %= 30;
+            flag++;
         }
     }
-    */
+    if (difficulty == 2)
+    {
+        flagh1++;
+        if (flagh1 % 25 == 0 && !(enemies[0]->getState()))
+        {
+            //spawnEnemy(0);
+            enemies[0]->setXPosition(0);
+            enemies[0]->setState(true);
+            std::cout << "Spawned an enemy";
+            flagh1 %= 30;
+            flagh1++;
+        }
+        flagh2++;
+        if (flagh2 % 20 == 0 && !(enemies[1]->getState()))
+        {
+            //spawnEnemy(0);
+            enemies[1]->setXPosition(305);
+            enemies[1]->setState(true);
+            std::cout << "Spawned an enemy";
+            flagh2 %= 20;
+            flagh2++;
+        }
+    }
 }
 
 void Game::play()
@@ -152,7 +112,6 @@ void Game::play()
             {
 
                 update();
-                //Sleep(10);
                 LCD.Clear();
                 draw();
                 if (player.isDead())
@@ -180,7 +139,9 @@ void Game::play()
         else
         {
             draw();
-            LCD.WriteAt("YOU LOSE", 80, 100);
+            LCD.WriteAt("YOU LOSE", 150, 100);
+            LCD.WriteAt("Quit To ", 150, 120);
+            LCD.WriteAt("Play Again", 150, 140);
             LCD.Update();
             while (!LCD.Touch(&x, &y))
             {
