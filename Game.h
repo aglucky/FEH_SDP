@@ -24,7 +24,7 @@ private:
     Background map = Background();
     Button quitButton = Button("Quit");
 
-    int difficulty,numberOfStomps, flag;
+    int difficulty,numberOfStomps, flag, flagh1, flagh2;
 
     int *stats;
 

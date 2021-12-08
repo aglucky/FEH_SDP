@@ -28,20 +28,20 @@ void MainMenu::drawMain()
  * @brief Draws the statistic screen
  * 
  */
-void MainMenu::drawStats(int *)
+void MainMenu::drawStats(int *stats)
 {
     LCD.SetBackgroundColor(ORANGE);
     
     LCD.Clear();
     LCD.SetFontColor(BLACK);
     LCD.WriteAt("Statistics",100, 50);
-    LCD.WriteAt("High Scores", 90, 90);
-    //Place Holder Values
+    LCD.WriteAt("From Last Game", 80, 90);
+    //Values Returned by last time game was played
     LCD.SetFontColor(BLUE);
-    LCD.WriteAt("Comer: 9999", 10, 110);
-    LCD.WriteAt("Gluck: 9998", 10, 130);
-    LCD.WriteAt("STOMPS: Comer 98", 10, 160);
-    LCD.WriteAt("Time: Gluck 650 s", 10, 180);
+    LCD.WriteAt("STOMPS:", 10, 160);
+    LCD.WriteAt(*stats, 95, 160);
+    LCD.WriteAt("Time:", 10, 180);
+    LCD.WriteAt(*(stats + 1), 70, 180);
     backButton.draw();
 }
 

@@ -12,7 +12,7 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 /** Empty Constructor*/
 Game::Game(int dif, int *s)
 {
-    cout <<"well the game was made";
+    cout << "well the game was made";
     gameStartTime = TimeNow();
     srand(TimeNowSec());
     player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
@@ -21,6 +21,7 @@ Game::Game(int dif, int *s)
     randTimeInterval = 8;
     flag = 0;
     stats = s;
+    *(stats + 2) = dif;
 }
 
 /**
@@ -49,24 +50,59 @@ void Game::draw()
 
 void Game::update()
 {
-    ++flag;
-    cout << "1";
     player.update();
-    cout << "2";
     for (int i = 0; i < MAX_ENEMIES; i++)
     {
         collisionCheck(&player, enemies[i]);
         enemies[i]->update(&player);
-        if(!(enemies[i]->getState())){
-            enemies[i]->setXPosition(0);
+    }
+
+    *(stats) = numberOfStomps;
+    *(stats + 1) = TimeNowSec() - gameStartTime;
+
+    if(difficulty == 1){
+    flag++;
+    if (flag % 30 == 0 && !(enemies[0]->getState()))
+    {
+        //spawnEnemy(0);
+        enemies[0]->setXPosition(0);
+        enemies[0]->setState(true);
+        std::cout << "Spawned an enemy";
+        flag %= 30;
+        flag++;
+    }
+    }
+    if(difficulty == 2){
+    flagh1++;
+    if (flagh1 % 25 == 0 && !(enemies[0]->getState()))
+    {
+        //spawnEnemy(0);
+        enemies[0]->setXPosition(0);
+        enemies[0]->setState(true);
+        std::cout << "Spawned an enemy";
+        flagh1 %= 30;
+        flagh1++;
+    }
+    flagh2++;
+    if (flagh2 % 20 == 0 && !(enemies[1]->getState()))
+    {
+        //spawnEnemy(0);
+        enemies[1]->setXPosition(305);
+        enemies[1]->setState(true);
+        std::cout << "Spawned an enemy";
+        flagh2 %= 20;
+        flagh2++;
+    }
+    }
+    //cout << player.getLives();
+    /*
+    for(int i = 0; i <MAX_ENEMIES; i++){
+    if(!(enemies[i]->getState())){
+            //enemies[i]->setXPosition(0);
             enemies[i]->setState(true);
         }
     }
-
-    //*(stats) = numberOfStomps;
-    //*(stats + 1) = TimeNowSec() - gameStartTime;
-    //cout << player.getLives();
-
+    */
     //Spawn New Enemies
     /*if(flag % 20 == 0){
         flag %= 20;
@@ -104,31 +140,21 @@ void Game::update()
 
 void Game::play()
 {
-cout << "GAEM PLAY";
     float x, y;
     while (true)
     {
         if (!player.isDead())
         {
-            cout << "0";
             draw();
-            cout << "-1";
             update();
 
             while (!LCD.Touch(&x, &y))
             {
+
                 update();
                 //Sleep(10);
                 LCD.Clear();
                 draw();
-
-                /*if(flag == 0){
-                    //spawnEnemy(0);
-                    enemies[0]->setState(true);
-                    std::cout << "Spawned an enemy";
-                    flag++;
-                }*/
-
                 if (player.isDead())
                 {
                     break;
