@@ -11,9 +11,13 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 /** Empty Constructor*/
 Game::Game(int dif)
 {
+    gameStartTime = TimeNow();
+    srand(TimeNowSec());
     player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
     difficulty = dif;
-    lastActiveEnemy = -1;
+    timeOfLastSpawn = 0;
+    randTimeInterval = 8;
+    flag = 0;
 }
 
 /**
@@ -38,13 +42,46 @@ void Game::draw()
 
 void Game::update()
 {
+    cout << "1";
     player.update();
+    cout << "2";
     for (int i = 0; i < 10; i++)
     {
+        cout << "3";
         collisionCheck(&player, enemies[i]);
+        cout << "4";
         enemies[i]->update(&player);
     }
-    cout << player.getLives();
+    //cout << player.getLives();
+   // ++flag;
+    //Spawn New Enemies
+    /*
+    if (flag % 10 == 0)
+    {
+        cout << "5";
+        flag %= 10;
+        switch (difficulty)
+        {
+        case 1:
+            if (TimeNowSec() - timeOfLastSpawn > randTimeInterval)
+            {
+                randTimeInterval = 1; rand() % 20 + 8
+                ;
+                timeOfLastSpawn = TimeNowSec();
+                spawn();
+            }
+            break;
+        case 2:
+            if (TimeNowSec() - timeOfLastSpawn > randTimeInterval)
+            {
+                randTimeInterval = rand() % 18 + 5;
+                timeOfLastSpawn = TimeNowSec() - gameStartTime;
+                spawn();
+            }
+            break;
+        }
+    }
+    */
 }
 
 void Game::play()
@@ -55,7 +92,9 @@ void Game::play()
     {
         if (!player.isDead())
         {
+            cout << "0";
             draw();
+            cout << "-1";
             update();
 
             while (!LCD.Touch(&x, &y))
@@ -64,11 +103,14 @@ void Game::play()
                 Sleep(10);
                 LCD.Clear();
                 draw();
-                if (lastActiveEnemy == -1)
-                {
-                    spawnEnemy(0);
+
+                if(flag == 0){
+                    //spawnEnemy(0);
+                    enemies[0]->setState(true);
                     std::cout << "Spawned an enemy";
+                    flag++;
                 }
+
                 if (player.isDead())
                 {
                     break;
@@ -110,29 +152,40 @@ void Game::play()
     }
 }
 
-void Game::spawn(){
-    switch(difficulty){
-        case 1:
-                spawnEnemy(0);
-            break;
-        case 2:
-
-            break;
-        default:
-            cout << "Not a Valid Difficulty.\n";
+void Game::spawn()
+{
+    int rand1 = rand() % 60;
+    int rand2 = rand() % 2;
+    switch (difficulty)
+    {
+    case 1:
+        spawnEnemy(0);
+        break;
+    case 2:
+        if (rand2 == 1)
+        {
+            spawnEnemy(rand1);
+        }
+        else
+        {
+            spawnEnemy(320 - rand1);
+        }
+        break;
+    default:
+        cout << "Not a Valid Difficulty.\n";
     }
 }
 
 void Game::spawnEnemy(int xloc)
 {
-    if (lastActiveEnemy <= 48)
+    for (int i = 0; i < 10; i++)
     {
-        enemies[lastActiveEnemy + 1]->setState(true);
-        ++lastActiveEnemy;
-    }
-    else
-    {
-        std::cout << "Max Number of Enemies Spawned";
+        if (!(enemies[i]->getState()))
+        {
+            enemies[i]->setXPosition(xloc);
+            enemies[i]->setState(true);
+            break;
+        }
     }
 }
 
@@ -161,7 +214,7 @@ bool Game::collisionCheck(Player *player, Enemy *enemy)
         else if (GameObject::isColliding(*player, *enemy) && collisionHeight > enemy->getYPos())
         {
             player->loseLife();
-            std::cout << player->getLives();
+            enemy->setState(false);
             return true;
         }
     }

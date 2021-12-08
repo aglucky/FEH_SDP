@@ -85,3 +85,7 @@ void Enemy::moveBackward(){
         xSpeed = -maxSpeed;
     }
 }
+
+void Enemy::setXPosition(int x){
+    xpos = x;
+}

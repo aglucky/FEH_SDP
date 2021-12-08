@@ -10,6 +10,7 @@ public:
     bool getState();
     void move();
     void update(Player *);
+    void setXPosition(int);
 
 private:
     bool state;
