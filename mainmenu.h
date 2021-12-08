@@ -23,12 +23,12 @@ class MainMenu
         //Constructor and instance methods
         MainMenu();
         void drawMain();
-        void drawStats();
+        void drawStats(int *);
         void drawRules();
         void drawCredits();
         void drawPlay();
-        int menu();
+        int menu(int *);
     
     private:
-    
+        int *stats;
 };

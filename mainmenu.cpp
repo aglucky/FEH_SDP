@@ -28,7 +28,7 @@ void MainMenu::drawMain()
  * @brief Draws the statistic screen
  * 
  */
-void MainMenu::drawStats()
+void MainMenu::drawStats(int *)
 {
     LCD.SetBackgroundColor(ORANGE);
     
@@ -105,7 +105,7 @@ void MainMenu::drawPlay()
  * 
  * @return Difficulty level of the game 
  */
-int MainMenu::menu()
+int MainMenu::menu(int *stats)
 {
     drawMain();
 
@@ -148,7 +148,7 @@ int MainMenu::menu()
         }
         else if (statButton.isPressed(x, y)) 
         {
-            drawStats();
+            drawStats(stats);
             while (1)
             {
                 Sleep(200);

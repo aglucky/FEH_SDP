@@ -7,7 +7,7 @@
 class Game
 {
 public:
-    Game(int difficulty);
+    Game(int difficulty, int* s);
     void draw();
     void update();
     void play();
@@ -26,7 +26,9 @@ private:
 
     int difficulty,numberOfStomps, flag;
 
-    unsigned int gameStartTime, timeOfLastSpawn, randTimeInterval;
+    int *stats;
+
+    unsigned int gameStartTime, randTimeInterval;
     
     Enemy a0 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);
     Enemy a1 = Enemy("Adam1FEH.pic", "Adam2FEH.pic", 0, 180);

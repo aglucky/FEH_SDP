@@ -10,15 +10,17 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 */
 
 /** Empty Constructor*/
-Game::Game(int dif)
+Game::Game(int dif, int *s)
 {
+    cout <<"well the game was made";
     gameStartTime = TimeNow();
     srand(TimeNowSec());
     player = Player(dif, "bryce1FEH.pic", "bryce2FEH.pic", 160, 160);
     difficulty = dif;
-    timeOfLastSpawn = 0;
+    numberOfStomps = 0;
     randTimeInterval = 8;
     flag = 0;
+    stats = s;
 }
 
 /**
@@ -33,7 +35,8 @@ void Game::draw()
     jump.draw();
     quitButton.draw();
 
-    LCD.WriteAt("Lives: ", 0, 20);
+    LCD.WriteAt("Lives: ", 0, 100);
+    LCD.WriteAt(player.getLives(), 80, 100);
     LCD.Update();
     for (int i = 0; i < MAX_ENEMIES; i++) //???HM
     {
@@ -52,17 +55,16 @@ void Game::update()
     cout << "2";
     for (int i = 0; i < MAX_ENEMIES; i++)
     {
-        if (flag % 30 == 0 && !(enemies[i]->getState()))
-        {
-            flag %= 30;
+        collisionCheck(&player, enemies[i]);
+        enemies[i]->update(&player);
+        if(!(enemies[i]->getState())){
             enemies[i]->setXPosition(0);
             enemies[i]->setState(true);
         }
-        cout << "3";
-        collisionCheck(&player, enemies[i]);
-        cout << "4";
-        enemies[i]->update(&player);
     }
+
+    //*(stats) = numberOfStomps;
+    //*(stats + 1) = TimeNowSec() - gameStartTime;
     //cout << player.getLives();
 
     //Spawn New Enemies
@@ -102,7 +104,7 @@ void Game::update()
 
 void Game::play()
 {
-
+cout << "GAEM PLAY";
     float x, y;
     while (true)
     {
@@ -224,7 +226,7 @@ bool Game::collisionCheck(Player *player, Enemy *enemy)
         if (GameObject::isColliding(*player, *enemy) && collisionHeight < enemy->getYPos())
         {
             enemy->setState(false);
-            std::cout << enemy->getState();
+            ++numberOfStomps;
             return true;
         }
         else if (GameObject::isColliding(*player, *enemy) && collisionHeight > enemy->getYPos())

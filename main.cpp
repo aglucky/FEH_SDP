@@ -3,16 +3,15 @@
 #include "Game.h"
 using namespace std;
 
-
 int main()
 {
 
-    
     // Create nessesary objects
+    int stats[3] = {0, 0, 0};
     MainMenu start = MainMenu();
     Player test = Player();
     int difficulty;
-    start.menu();
+    
     /*
     GameObject one = GameObject("basicEnemyFEH.pic", 17, 0);
     GameObject two = GameObject("basicEnemyFEH.pic", 0, 0);
@@ -36,13 +35,13 @@ int main()
     */
 
     // Start the game
-    while(true)
+    while (true)
     {
         // Get the difficulty
-        difficulty = start.menu();
-        Game game = Game(difficulty);
+        difficulty = start.menu(stats);
+        cout << difficulty;
+        Game game = Game(difficulty, stats);
         game.play();
     }
     return 0;
-    
 }
