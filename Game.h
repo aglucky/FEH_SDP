@@ -14,7 +14,7 @@ public:
 private:
     //bool collisionResult(Player, GameObject*);
     //void collisionCheck(Player, GameObject *[], int);
-    void collisionCheck(Player, Enemy);
+    bool collisionCheck(Player, Enemy);
     void addEnemy();
 
     Player player;

@@ -148,3 +148,6 @@ bool Player::isDead(){
     }
 }
 
+int Player::getLives(){
+    return playerLives;
+}

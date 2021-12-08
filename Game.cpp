@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#define ACTIVE true
+#define INACTIVE false
 /*
 This game class holds the methods that allow for drawing the whole game at once.
 
@@ -7,36 +9,43 @@ NOTE: There is a potential error if a user moves more than 3.Something billion p
 */
 
 /** Empty Constructor*/
-Game::Game(int dif){
+Game::Game(int dif)
+{
 
     player = Player(dif, "bryce1FEH1.pic", "bryce2FEH2.pic", 160, 185);
     difficulty = dif;
-    for(int i = 0; i < 50; i++){
-        enemies[i] = Enemy("basicEnemyFEH.pic", 160 , 185);
+    for (int i = 0; i < 50; i++)
+    {
+        enemies[i] = Enemy("basicEnemyFEH.pic", 20, 185);
     }
 }
-
 
 /**
  * @brief Draws the game state
  * 
  */
-void Game::draw(){
-    
+void Game::draw()
+{
+
     map.draw();
     player.draw();
     jump.draw();
     backButton.draw();
-    for(int i = 0; i < 1; i++){
+    for (int i = 0; i < 1; i++)
+    {
+        std::cout << enemies[i].getState();
+        if(enemies[i].getState()){
         enemies[i].draw();
         collisionCheck(player, enemies[i]);
-    }   
+    }
+    }
 }
 
-void Game::play(){
+void Game::play()
+{
 
-    float x,y;
-     while (true)
+    float x, y;
+    while (true)
     {
         draw();
 
@@ -46,7 +55,6 @@ void Game::play(){
             Sleep(10);
             LCD.Clear();
             draw();
-            
         }
 
         if (jump.isPressed(x, y))
@@ -54,21 +62,22 @@ void Game::play(){
             player.jump();
         }
 
-        else if (x<120)
+        else if (x < 120)
         {
             player.moveBackward();
         }
 
-        else if (x>120)
+        else if (x > 120)
         {
             player.moveForward();
         }
-                LCD.Clear();
-        if(backButton.isPressed(x, y)){
+        LCD.Clear();
+        if (backButton.isPressed(x, y))
+        {
             player.~Player();
             //Need to prevent additional memory leaks??
             return;
-        }   
+        }
     }
 }
 /**
@@ -81,14 +90,25 @@ void Game::play(){
  * @param player 
  * @param enemy 
  */
-void Game::collisionCheck(Player player, Enemy enemy){
+bool Game::collisionCheck(Player player, Enemy enemy)
+{
     //NOTE: Making this too sensitive causes issues because the game does not update/draw itself fast enough.
-    int collisionHeight =  player.getYPos() + player.getHeight()/2;
-        if(GameObject::isColliding(player, enemy) && collisionHeight < enemy.getYPos()){
-            
-        }else if(GameObject::isColliding(player, enemy) && collisionHeight > enemy.getYPos()){
-
-        }
+    int collisionHeight = player.getYPos() + player.getHeight() / 2;
+    if(enemy.getState()){
+    if (GameObject::isColliding(player, enemy) && collisionHeight < enemy.getYPos())
+    {
+        enemy.setState(INACTIVE);
+        std::cout << enemy.getState();
+        return true;
+    }
+    else if (GameObject::isColliding(player, enemy) && collisionHeight > enemy.getYPos())
+    {
+        player.loseLife();
+        //std::cout << player.getLives();
+        return true;
+    }
+    }
+    return false;
 }
 
 /*

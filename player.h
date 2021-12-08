@@ -32,4 +32,6 @@ public:
     void update();
     
     bool isDead();
+
+    int getLives();
 };
