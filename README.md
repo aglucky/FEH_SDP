@@ -1,6 +1,6 @@
-# FEH Adventure
+# Stomp
 
-Embark on an epic adventure to pass FEH.
+[Project Website](https://u.osu.edu/fehsdp2021bjg0300ubisoftd/)
 
 Authors
 Adam Gluck, William Comer
